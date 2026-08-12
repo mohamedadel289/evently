@@ -1,4 +1,5 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/screens/create_event_screen.dart';
 import 'package:evently/tabs/favorite/favorite_tab.dart';
 import 'package:evently/tabs/home/home_tab.dart';
 import 'package:evently/tabs/profile/profile_tab.dart';
@@ -53,7 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppTheme.primaryLight,
-        onPressed: () {},
+        onPressed: () {
+         Navigator.of(context).pushNamed(CreateEventScreen.routeName);
+        },
         child: const Icon(Icons.add, color: AppTheme.white, size: 30),
         shape: CircleBorder(),
         ),
