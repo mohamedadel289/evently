@@ -29,6 +29,9 @@ class AppTheme {
     unselectedItemColor: grey,
 
   ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: primaryLight,
+  ),
  );
  static ThemeData darkTheme = ThemeData(
   
