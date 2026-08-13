@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: tabs[currentIndex],
+      body: SafeArea(child: tabs[currentIndex]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) {
@@ -57,8 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
          Navigator.of(context).pushNamed(CreateEventScreen.routeName);
         },
-        child: const Icon(Icons.add, color: AppTheme.white, size: 30),
         shape: CircleBorder(),
+        child: const Icon(Icons.add, color: AppTheme.white, size: 30),
         ),
         //floatingActionButtonLocation: FloatingActionButtonLocation.centerTop
       
