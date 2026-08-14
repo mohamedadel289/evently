@@ -14,18 +14,19 @@ class TabItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).primaryColor;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: isSelected ? AppTheme.primaryLight : AppTheme.white,
+        color: isSelected ? primaryColor : AppTheme.white,
         border: Border.all(color: AppTheme.offwhite),
       ),
       child: Row(
         children: [
           Icon(
             icon,
-            color: isSelected ? AppTheme.white : AppTheme.primaryLight,
+            color: isSelected ? AppTheme.white : primaryColor,
           ),
           SizedBox(width: 8),
           Text(

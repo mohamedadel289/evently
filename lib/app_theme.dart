@@ -13,6 +13,7 @@ class AppTheme {
  static const Color offwhite =Color(0xFFF0F0F0);
  static const Color red =Color(0xFFFF3232);
  static ThemeData lightTheme = ThemeData(
+  primaryColor: primaryLight,
   scaffoldBackgroundColor: backgroundLight,
   appBarTheme: AppBarTheme(
     backgroundColor: primaryLight,

@@ -3,6 +3,8 @@ import 'package:evently/tabs/home/tab_items.dart';
 import 'package:flutter/material.dart';
 
 class HomeHeader extends StatefulWidget {
+  const HomeHeader({super.key});
+
   
 
   @override
