@@ -11,6 +11,7 @@ class AppTheme {
   static const Color black = Color(0xFF1C1C1C);
   static const Color offwhite = Color(0xFFF0F0F0);
   static const Color red = Color(0xFFFF3232);
+  static const Color lightgray = Color(0xFFE9EAEB);
   static ThemeData lightTheme = ThemeData(
     primaryColor: primaryLight,
     scaffoldBackgroundColor: backgroundLight,
@@ -69,6 +70,20 @@ class AppTheme {
       //   borderRadius: BorderRadius.circular(16),
       // borderSide: BorderSide(color: primaryLight),
       //),
+    ),
+    listTileTheme: ListTileThemeData(
+      titleTextStyle: TextStyle(
+        color: black,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ), 
+      tileColor: white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: offwhite)
+      ),
+      
+    
     ),
   );
   static ThemeData darkTheme = ThemeData();
