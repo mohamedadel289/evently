@@ -49,6 +49,11 @@ class AppTheme {
         fontSize: 20,
         fontWeight: FontWeight.w500,
       ),
+       headlineMedium: TextStyle(
+        color: primaryLight,
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -57,19 +62,25 @@ class AppTheme {
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: offwhite),
       ),
+        focusedBorder: OutlineInputBorder(
+         borderRadius: BorderRadius.circular(16),
+       borderSide: BorderSide(color: offwhite),
+      ),
+         errorBorder: OutlineInputBorder(
+         borderRadius: BorderRadius.circular(16),
+       borderSide: BorderSide(color: offwhite),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+         borderRadius: BorderRadius.circular(16),
+       borderSide: BorderSide(color: offwhite),
+      ),
+      
       hintStyle: TextStyle(
         color: darkgray,
         fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
-      //   enabledBorder: OutlineInputBorder(
-      //   borderRadius: BorderRadius.circular(16),
-      // borderSide: BorderSide(color: offwhite),
-      //),
-      //   focusedBorder: OutlineInputBorder(
-      //   borderRadius: BorderRadius.circular(16),
-      // borderSide: BorderSide(color: primaryLight),
-      //),
+       
     ),
     listTileTheme: ListTileThemeData(
       titleTextStyle: TextStyle(
@@ -82,8 +93,30 @@ class AppTheme {
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(color: offwhite)
       ),
-      
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: primaryLight,
+        textStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          decoration: TextDecoration.underline,
+        ),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
     
+        backgroundColor: primaryLight,
+        foregroundColor: white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        textStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
     ),
   );
   static ThemeData darkTheme = ThemeData();
