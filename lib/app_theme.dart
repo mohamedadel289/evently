@@ -68,11 +68,11 @@ class AppTheme {
       ),
          errorBorder: OutlineInputBorder(
          borderRadius: BorderRadius.circular(16),
-       borderSide: BorderSide(color: offwhite),
+       borderSide: BorderSide(color: red),
       ),
       focusedErrorBorder: OutlineInputBorder(
          borderRadius: BorderRadius.circular(16),
-       borderSide: BorderSide(color: offwhite),
+       borderSide: BorderSide(color: red),
       ),
       
       hintStyle: TextStyle(

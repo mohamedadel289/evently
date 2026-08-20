@@ -40,8 +40,8 @@ class ProfileTab extends StatelessWidget {
               value: 'en',
               items: LanguageModel.Language.map(
                 (Language) => DropdownMenuItem(
-                  child: Text(Language.name),
                   value: Language.code,
+                  child: Text(Language.name),
                 ),
               ).toList(),
               onChanged: (Languagecode) {

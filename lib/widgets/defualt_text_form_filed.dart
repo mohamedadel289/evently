@@ -7,14 +7,17 @@ class DefaultTextFormField extends StatefulWidget {
   String? sufixIcon;
   String? prefixIcon;
   bool ispassword;
+  String? Function(String?)? validator;
+  
   void Function(String)? onchanged;
-  DefaultTextFormField({
+  DefaultTextFormField({super.key, 
     this.controller,
     required this.hintText,
     this.sufixIcon,
     this.prefixIcon,
     this.ispassword = false,
     this.onchanged,
+    this.validator,
   });
 
   @override
@@ -30,6 +33,9 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
       onChanged: widget.onchanged,
       controller: widget.controller,
       obscureText: isobscureText,
+      validator: widget.validator,
+      autovalidateMode: .onUserInteraction,
+      onTapOutside: (_)=> FocusManager.instance.primaryFocus?.unfocus(),
       decoration: InputDecoration(
         hintText: widget.hintText,
         prefixIcon: widget.prefixIcon == null
