@@ -51,6 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if(value ==null ||value.length<3){
                         return 'Invalid name';
                       }
+                      return null;
                     }
                   ),
                   SizedBox(height: 16),
@@ -62,6 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if(value ==null ||!value.contains('@')){
                         return 'Invalid email';
                       }
+                      return null;
                     }
                   ),
                   SizedBox(height: 16),
@@ -74,6 +76,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if(value ==null ||value.length<8){
                         return 'Invalid password';
                       }
+                      return null;
                     }
                   ),
                   SizedBox(height: 16),
@@ -86,6 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if(value != passwordController.text){
                         return 'Passwords do not match';
                       }
+                      return null;
                     }
                   ),
                   SizedBox(height: 8),

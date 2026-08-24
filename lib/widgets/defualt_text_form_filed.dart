@@ -7,6 +7,7 @@ class DefaultTextFormField extends StatefulWidget {
   String? sufixIcon;
   String? prefixIcon;
   bool ispassword;
+  int maxLines;
   String? Function(String?)? validator;
   
   void Function(String)? onchanged;
@@ -18,6 +19,7 @@ class DefaultTextFormField extends StatefulWidget {
     this.ispassword = false,
     this.onchanged,
     this.validator,
+    this.maxLines = 1,
   });
 
   @override
@@ -33,6 +35,7 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
       onChanged: widget.onchanged,
       controller: widget.controller,
       obscureText: isobscureText,
+      maxLines: widget.maxLines,
       validator: widget.validator,
       autovalidateMode: .onUserInteraction,
       onTapOutside: (_)=> FocusManager.instance.primaryFocus?.unfocus(),

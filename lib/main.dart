@@ -10,7 +10,6 @@ void main() {
 }
 class evently extends StatelessWidget {
   const evently({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,8 +20,9 @@ class evently extends StatelessWidget {
       CreateEventScreen.routeName:(_) =>  CreateEventScreen(),
       LoginScreen.routeName:(_)=> LoginScreen(),
       RegisterScreen.routeName:(_)=> RegisterScreen(),
+     // ForgetPasswordScreen.routeName:(_)=> ForgetPasswordScreen(),
      },
-     initialRoute: LoginScreen.routeName,
+     initialRoute: CreateEventScreen.routeName,
     );
   }
 }

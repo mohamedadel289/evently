@@ -1,4 +1,5 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/screens/forget_password.dart';
 import 'package:evently/screens/register_screen.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
 import 'package:evently/widgets/elvated_button.dart';
@@ -50,6 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       if(value==null||value.length<3){
                         return 'invalid email';
                       }
+                      return null;
                     }
                   ),
                   SizedBox(height: 16),
@@ -62,12 +64,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       if(value==null||value.length<8){
                         return 'invalid password';
                       }
+                      return null;
                     }
                   ),
                   SizedBox(height: 8),
                   TextButton(
                     style: TextButton.styleFrom(alignment: Alignment.centerRight),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => ForgetPasswordScreen(),
+                      ));
+                    },
                     child: Text(
                       'Forgot Password?',
                       style: theme.textTheme.titleSmall?.copyWith(
