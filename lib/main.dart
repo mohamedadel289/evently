@@ -25,7 +25,7 @@ class evently extends StatelessWidget {
       RegisterScreen.routeName:(_)=> RegisterScreen(),
      // ForgetPasswordScreen.routeName:(_)=> ForgetPasswordScreen(),
      },
-     initialRoute: CreateEventScreen.routeName,
+     initialRoute: HomeScreen.routeName,
     );
   }
 }
