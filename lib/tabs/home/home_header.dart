@@ -1,4 +1,5 @@
 import 'package:evently/models/categories_model.dart';
+import 'package:evently/models/Event_Model.dart';
 import 'package:evently/tabs/home/tab_items.dart';
 import 'package:flutter/material.dart';
 

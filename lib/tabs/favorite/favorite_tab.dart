@@ -13,16 +13,16 @@ class FavoriteTab extends StatelessWidget {
         children: [
           DefaultTextFormField(hintText: 'Search for event', sufixIcon: 'search',),
           SizedBox(height: 16),
-        Expanded(
-              child: ListView.separated(
+      //  Expanded(
+        //      child: ListView.separated(
                 
-                itemCount: 10, 
-                itemBuilder: (context, index) => EventItem(),
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: 16);
-                },
-              ),
-            ),
+          //      itemCount: 10, 
+            //    itemBuilder: (context, index) => EventItem(),
+              //  separatorBuilder: (context, index) {
+                //  return SizedBox(height: 16);
+                //},
+              //),
+          //  ),
         ],
       ),
     );
