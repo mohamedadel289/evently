@@ -1,5 +1,4 @@
 import 'package:evently/widgets/defualt_text_form_filed.dart';
-import 'package:evently/widgets/event_item.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteTab extends StatelessWidget {
@@ -13,16 +12,16 @@ class FavoriteTab extends StatelessWidget {
         children: [
           DefaultTextFormField(hintText: 'Search for event', sufixIcon: 'search',),
           SizedBox(height: 16),
-        Expanded(
-              child: ListView.separated(
+      //  Expanded(
+        //      child: ListView.separated(
                 
-                itemCount: 10, 
-                itemBuilder: (context, index) => EventItem(),
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: 16);
-                },
-              ),
-            ),
+          //      itemCount: 10, 
+            //    itemBuilder: (context, index) => EventItem(),
+              //  separatorBuilder: (context, index) {
+                //  return SizedBox(height: 16);
+                //},
+              //),
+          //  ),
         ],
       ),
     );
