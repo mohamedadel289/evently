@@ -3,7 +3,6 @@ import 'package:evently/models/Event_Model.dart';
 import 'package:evently/models/categories_model.dart';
 import 'package:evently/tabs/home/tab_items.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
-import 'package:evently/widgets/elvated_button.dart';
 import 'package:evently/widgets/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

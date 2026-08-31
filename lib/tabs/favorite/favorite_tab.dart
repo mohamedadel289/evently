@@ -1,5 +1,4 @@
 import 'package:evently/widgets/defualt_text_form_filed.dart';
-import 'package:evently/widgets/event_item.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteTab extends StatelessWidget {
