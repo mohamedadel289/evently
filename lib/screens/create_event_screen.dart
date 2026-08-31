@@ -4,6 +4,7 @@ import 'package:evently/models/categories_model.dart';
 import 'package:evently/tabs/home/tab_items.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
 import 'package:evently/widgets/firebase_services.dart';
+import 'package:evently/widgets/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
@@ -235,7 +236,9 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   }
 
   void addevent() {
-    if (selectedDate != null && selectedTime != null && formKey.currentState!.validate()) {
+    if (selectedDate != null &&
+        selectedTime != null &&
+        formKey.currentState!.validate()) {
       DateTime dateTime = DateTime(
         selectedDate!.year,
         selectedDate!.month,
@@ -244,14 +247,20 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
         selectedTime!.minute,
       );
       EventModel event = EventModel(
-      title: titleController.text,
-      description: descriptionController.text,
-      date: dateTime,
-      category: selectedCategory,
-    );
-    firebase_services.createEvent(event);
+        title: titleController.text,
+        description: descriptionController.text,
+        date: dateTime,
+        category: selectedCategory,
+      );
+      firebase_services
+          .createEvent(event)
+          .then((_) {
+            Navigator.of(context).pop();
+            UiUtils.showSuccessMessage('Event created successfully');
+          })
+          .catchError((_) {
+            UiUtils.showErrorMessage('Failed to create event');
+          });
     }
-
-    
   }
 }
