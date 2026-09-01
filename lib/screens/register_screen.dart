@@ -1,7 +1,12 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/home_screen.dart';
 import 'package:evently/screens/login_screen.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
 import 'package:evently/widgets/elvated_button.dart';
+import 'package:evently/widgets/firebase_services.dart';
+import 'package:evently/widgets/ui_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -14,10 +19,12 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  GlobalKey<FormState> formkey =GlobalKey<FormState>();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -84,8 +91,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hintText: 'Confirm your password',
                     prefixIcon: 'lock',
                     ispassword: true,
-                    controller: passwordController,
+                    controller: confirmPasswordController,
                     validator:(value){
+                      if(value == null || value.isEmpty){
+                        return 'Please confirm your password';
+                      }
                       if(value != passwordController.text){
                         return 'Passwords do not match';
                       }
@@ -95,7 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(height: 8),
               
                   SizedBox(height: 48),
-                  ElvatedButton(text: 'Register', onPressed: () {}),
+                  ElvatedButton(text: 'Register', onPressed: register),
                   SizedBox(height: 48),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -163,9 +173,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
-  void register(){
-    if(formkey.currentState!.validate()){
-    // Perform registration logic here
-  }
+  void register() async {
+    if (!formkey.currentState!.validate()) return;
+   firebase_services.register(
+      name: nameController.text,
+      email: emailController.text,
+      password: passwordController.text,
+    ).then((user) {
+      Navigator.of(context).pushNamed(HomeScreen.routeName);
+    }).catchError((error) {
+      String? errorMessage;
+      if(error is FirebaseAuthException){
+       errorMessage = error.message;
+      } else {
+        UiUtils.showErrorMessage(errorMessage);
+      }
+    });
+    
   }
 }
