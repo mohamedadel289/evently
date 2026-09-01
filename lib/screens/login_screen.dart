@@ -165,9 +165,9 @@ class _LoginScreenState extends State<LoginScreen> {
       String? errorMessage;
       if(error is FirebaseAuthException){
         errorMessage = error.message;
-      } else {
+      } 
         UiUtils.showErrorMessage( errorMessage);
-      }
+      
     });
 
    

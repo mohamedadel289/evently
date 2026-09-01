@@ -185,9 +185,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       String? errorMessage;
       if(error is FirebaseAuthException){
        errorMessage = error.message;
-      } else {
+      } 
         UiUtils.showErrorMessage(errorMessage);
-      }
     });
     
   }
