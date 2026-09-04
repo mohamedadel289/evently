@@ -1,5 +1,6 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/login_screen.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
 import 'package:evently/widgets/elvated_button.dart';
@@ -8,6 +9,7 @@ import 'package:evently/widgets/ui_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String routeName = '/RegisterScreen';
@@ -175,19 +177,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
   void register() async {
     if (!formkey.currentState!.validate()) return;
-   firebase_services.register(
-      name: nameController.text,
-      email: emailController.text,
-      password: passwordController.text,
-    ).then((user) {
-      Navigator.of(context).pushNamed(HomeScreen.routeName);
-    }).catchError((error) {
-      String? errorMessage;
-      if(error is FirebaseAuthException){
-       errorMessage = error.message;
-      } 
-        UiUtils.showErrorMessage(errorMessage);
-    });
-    
+
+    firebase_services
+        .register(
+          name: nameController.text.trim(),
+          email: emailController.text.trim(),
+          password: passwordController.text,
+        )
+        .then((user) {
+          Provider.of<UserProvider>(context, listen: false).setCurrentUser(user);
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        })
+        .catchError((error) {
+          String? errorMessage;
+          if (error is FirebaseAuthException) {
+            errorMessage = error.message;
+          }
+          UiUtils.showErrorMessage(errorMessage ?? 'Registration failed');
+        });
   }
 }

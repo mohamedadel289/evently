@@ -1,9 +1,9 @@
 import 'package:evently/models/categories_model.dart';
 import 'package:evently/provider/events_provider.dart';
+import 'package:evently/provider/user_provider.dart';
 import 'package:evently/tabs/home/tab_items.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 
 class HomeHeader extends StatefulWidget {
   const HomeHeader({super.key});
@@ -14,15 +14,18 @@ class HomeHeader extends StatefulWidget {
 
 class _HomeHeaderState extends State<HomeHeader> {
   int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    TextTheme theme = Theme.of(context).textTheme;
+    final user = Provider.of<UserProvider>(context, listen: false).currentUser;
+    final theme = Theme.of(context).textTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Welcome Back ✨', style: theme.titleMedium),
         SizedBox(height: 4),
-        Text('Mohamed Adel', style: theme.titleLarge),
+        Text(user?.name ?? 'Guest', style: theme.titleLarge),
         DefaultTabController(
           length: CategoriesModel.Categories.length + 1,
           child: TabBar(

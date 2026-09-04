@@ -51,16 +51,35 @@ class firebase_services {
     return user;
   }
 
- static Future<UserModel> login({
+  static Future<UserModel> login({
     required String email,
     required String password,
   }) async {
+    final trimmedEmail = email.trim();
+    final trimmedPassword = password.trim();
+
     UserCredential credential = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
+        .signInWithEmailAndPassword(
+          email: trimmedEmail,
+          password: trimmedPassword,
+        );
+
     CollectionReference<UserModel> usercollection = getusercollection();
     DocumentSnapshot<UserModel> docSnapshot = await usercollection
         .doc(credential.user!.uid)
         .get();
+
+    if (!docSnapshot.exists || docSnapshot.data() == null) {
+      final fallbackUser = UserModel(
+        id: credential.user!.uid,
+        name: credential.user!.displayName ??
+            (credential.user!.email ?? trimmedEmail).split('@').first,
+        email: credential.user!.email ?? trimmedEmail,
+      );
+      await usercollection.doc(fallbackUser.id).set(fallbackUser);
+      return fallbackUser;
+    }
+
     return docSnapshot.data()!;
   }
 }

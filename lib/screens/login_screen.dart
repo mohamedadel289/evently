@@ -1,5 +1,6 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/forget_password.dart';
 import 'package:evently/screens/register_screen.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
@@ -8,6 +9,7 @@ import 'package:evently/widgets/firebase_services.dart';
 import 'package:evently/widgets/ui_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/LoginScreen';
@@ -156,21 +158,22 @@ class _LoginScreenState extends State<LoginScreen> {
   }
   void login() async {
     if (!formkey.currentState!.validate()) return;
-    firebase_services.login(
-      email: emailController.text,
-      password: passwordController.text,
-    ).then((user) {
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-    }).catchError((error) {
-      String? errorMessage;
-      if(error is FirebaseAuthException){
-        errorMessage = error.message;
-      } 
-        UiUtils.showErrorMessage( errorMessage);
-      
-    });
 
-   
-    
+    firebase_services
+        .login(
+          email: emailController.text,
+          password: passwordController.text,
+        )
+        .then((user) {
+          Provider.of<UserProvider>(context, listen: false).setCurrentUser(user);
+          Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+        })
+        .catchError((error) {
+          String? errorMessage;
+          if (error is FirebaseAuthException) {
+            errorMessage = error.message;
+          }
+          UiUtils.showErrorMessage(errorMessage ?? 'Login failed');
+        });
   }
 }
