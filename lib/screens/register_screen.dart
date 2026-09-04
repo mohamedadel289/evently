@@ -1,5 +1,4 @@
 import 'package:evently/app_theme.dart';
-import 'package:evently/home_screen.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/login_screen.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
@@ -7,7 +6,6 @@ import 'package:evently/widgets/elvated_button.dart';
 import 'package:evently/widgets/firebase_services.dart';
 import 'package:evently/widgets/ui_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
