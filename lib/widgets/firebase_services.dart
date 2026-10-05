@@ -111,7 +111,6 @@ class firebase_services {
 
   static Future<User?> _googleAuth() async {
     final googleSignIn = GoogleSignIn();
-    // Clear the cached Google account so the account picker is shown each time.
     await googleSignIn.signOut();
     final googleUser = await googleSignIn.signIn();
     if (googleUser == null) return null;
