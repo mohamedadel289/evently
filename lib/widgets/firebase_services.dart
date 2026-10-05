@@ -35,6 +35,8 @@ class firebase_services {
     return querySnapshot.docs.map((docSnapshot) => docSnapshot.data()).toList();
   }
 
+  static Future<void> logout() async => await FirebaseAuth.instance.signOut();
+
   static Future<UserModel> register({
     required String name,
     required String email,
@@ -96,6 +98,7 @@ class firebase_services {
       'favoriteeventID': FieldValue.arrayUnion([eventId]),
     });
   }
+
   static Future<void> removeEventFromFavorites(eventId) async {
     CollectionReference<UserModel> usercollection = getusercollection();
     DocumentReference<UserModel> userDoc = usercollection.doc(
@@ -105,41 +108,46 @@ class firebase_services {
       'favoriteeventID': FieldValue.arrayRemove([eventId]),
     });
   }
- static Future<UserModel?> loginwithGoogle() async {
-  // 1. السطر ده هو اللي بيفتح Bottom Sheet لاختيار الإيميل من الجهاز
-  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-  
-  // لو المستخدم قفل الشاشة بدون ما يختار إيميل
-  if (googleUser == null) return null;
 
-  // 2. استخراج التوكن للتوثيق مع فايربيز
-  final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-  final AuthCredential credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth.accessToken,
-    idToken: googleAuth.idToken,
-  );
+  static Future<UserModel?> loginwithGoogle() async {
+    // 1. السطر ده هو اللي بيفتح Bottom Sheet لاختيار الإيميل من الجهاز
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-  // 3. إتمام الدخول في FirebaseAuth
-  UserCredential userCredential =
-      await FirebaseAuth.instance.signInWithCredential(credential);
+    // لو المستخدم قفل الشاشة بدون ما يختار إيميل
+    if (googleUser == null) return null;
 
-  // 4. جلب أو حفظ بيانات اليوزر في Firestore
-  final usercollection = getusercollection();
-  final docSnapshot = await usercollection.doc(userCredential.user!.uid).get();
-
-  if (!docSnapshot.exists || docSnapshot.data() == null) {
-    final fallbackUser = UserModel(
-      id: userCredential.user!.uid,
-      name: userCredential.user!.displayName ??
-          googleUser.displayName ??
-          (userCredential.user!.email ?? '').split('@').first,
-      email: userCredential.user!.email ?? googleUser.email,
-      favoriteeventID: [],
+    // 2. استخراج التوكن للتوثيق مع فايربيز
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
     );
-    await usercollection.doc(fallbackUser.id).set(fallbackUser);
-    return fallbackUser;
-  }
 
-  return docSnapshot.data()!;
-}
+    // 3. إتمام الدخول في FirebaseAuth
+    UserCredential userCredential = await FirebaseAuth.instance
+        .signInWithCredential(credential);
+
+    // 4. جلب أو حفظ بيانات اليوزر في Firestore
+    final usercollection = getusercollection();
+    final docSnapshot = await usercollection
+        .doc(userCredential.user!.uid)
+        .get();
+
+    if (!docSnapshot.exists || docSnapshot.data() == null) {
+      final fallbackUser = UserModel(
+        id: userCredential.user!.uid,
+        name:
+            userCredential.user!.displayName ??
+            googleUser.displayName ??
+            (userCredential.user!.email ?? '').split('@').first,
+        email: userCredential.user!.email ?? googleUser.email,
+        favoriteeventID: [],
+      );
+      await usercollection.doc(fallbackUser.id).set(fallbackUser);
+      return fallbackUser;
+    }
+
+    return docSnapshot.data()!;
+  }
 }

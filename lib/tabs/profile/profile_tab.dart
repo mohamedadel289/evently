@@ -1,6 +1,8 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/models/Language_model.dart';
 import 'package:evently/provider/user_provider.dart';
+import 'package:evently/screens/login_screen.dart';
+import 'package:evently/widgets/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -62,6 +64,12 @@ class ProfileTab extends StatelessWidget {
               height: 24,
               fit: BoxFit.scaleDown,
             ),
+            onTap: () {
+              firebase_services.logout().then((_) {
+                Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                Provider.of<UserProvider>(context, listen: false).setCurrentUser(null);
+              });
+            }
           ),
         ],
       ),
