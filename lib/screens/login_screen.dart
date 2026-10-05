@@ -1,5 +1,7 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/models/user_model.dart';
+import 'package:evently/provider/events_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/forget_password.dart';
 import 'package:evently/screens/register_screen.dart';
@@ -43,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 28,
                     fit: BoxFit.scaleDown,
                   ),
-                  SizedBox(height: 48),
+                  SizedBox(height: 40),
                   Text(
                     'Login to your account',
                     style: theme.textTheme.headlineMedium,
@@ -135,7 +137,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         side: BorderSide(color: AppTheme.offwhite),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      googlelogin();
+                    },
                     label: Text(
                       'Login with Google',
                       style: theme.textTheme.titleMedium?.copyWith(
@@ -156,24 +160,47 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-  void login() async {
+  Future<void> login() async {
     if (!formkey.currentState!.validate()) return;
 
-    firebase_services
-        .login(
-          email: emailController.text,
-          password: passwordController.text,
-        )
-        .then((user) {
-          Provider.of<UserProvider>(context, listen: false).setCurrentUser(user);
-          Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-        })
-        .catchError((error) {
-          String? errorMessage;
-          if (error is FirebaseAuthException) {
-            errorMessage = error.message;
-          }
-          UiUtils.showErrorMessage(errorMessage ?? 'Login failed');
-        });
+    try {
+      final user = await firebase_services.login(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      if (!mounted) return;
+      Provider.of<UserProvider>(context, listen: false).setCurrentUser(user);
+      await Provider.of<eventsProvider>(context, listen: false).getEvents();
+      if (!mounted) return;
+      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+    } on FirebaseAuthException catch (error) {
+      if (!mounted) return;
+      UiUtils.showErrorMessage(error.message ?? 'Login failed');
+    } catch (error) {
+      if (!mounted) return;
+      UiUtils.showErrorMessage(error.toString());
+    }
+  }
+  void googlelogin() async {
+    try {
+    
+      UserModel? user = await firebase_services.loginwithGoogle();
+
+     
+      if (user == null) return;
+
+      if (!mounted) return;
+
+    
+      Provider.of<UserProvider>(context, listen: false).setCurrentUser(user);
+      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+    } catch (error) {
+      String? errorMessage;
+      if (error is FirebaseAuthException) {
+        errorMessage = error.message;
+      }
+      UiUtils.showErrorMessage(errorMessage ?? 'Google login failed');
+    }
   }
 }
