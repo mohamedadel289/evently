@@ -1,4 +1,6 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/home_screen.dart';
+import 'package:evently/provider/events_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/login_screen.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
@@ -152,7 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         side: BorderSide(color: AppTheme.offwhite),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: registerWithGoogle,
                     label: Text(
                       'Sign Up with Google',
                       style: theme.textTheme.titleMedium?.copyWith(
@@ -194,4 +196,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
           UiUtils.showErrorMessage(errorMessage ?? 'Registration failed');
         });
   }
-}
+  void registerWithGoogle() async {
+    try {
+      final user = await firebase_services.signupwithGoogle();
+          if (user == null || !mounted) return;
+      Provider.of<UserProvider>(context, listen: false).setCurrentUser(user);
+      await Provider.of<eventsProvider>(context, listen: false).getEvents();
+      if (!mounted) return;
+      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+    } catch (error) {
+      String? errorMessage;
+      if (error is FirebaseAuthException) {
+        errorMessage = error.message;
+      }
+      UiUtils.showErrorMessage(errorMessage ?? 'Google sign-in failed');
+    }}}

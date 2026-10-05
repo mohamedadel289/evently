@@ -13,24 +13,15 @@ class FavoriteTab extends StatefulWidget {
 }
 
 class _FavoriteTabState extends State<FavoriteTab> {
-  late eventsProvider eventProvider;
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      List<String> favoriteEvents =
-        Provider.of<UserProvider>(
-          context,
-          listen: false,
-        ).currentUser!.favoriteeventID ;
-    eventProvider.filterFavoriteEvents(favoriteEvents);
-    });
-    
-  }
-
   @override
   Widget build(BuildContext context) {
-    eventProvider = Provider.of<eventsProvider>(context);
+    final eventProvider = context.watch<eventsProvider>();
+    final user = context.watch<UserProvider>().currentUser;
+    final favoriteEventIds = user?.favoriteeventID ?? <String>[];
+    final favoriteEvents = eventProvider.events
+        .where((event) => favoriteEventIds.contains(event.id))
+        .toList();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -40,16 +31,16 @@ class _FavoriteTabState extends State<FavoriteTab> {
             sufixIcon: 'search',
           ),
           SizedBox(height: 16),
-            Expanded(
-                child: ListView.separated(
-
-               itemCount: eventProvider.FavoriteEvents.length,
-              itemBuilder: (context, index) => EventItem(event:eventProvider.FavoriteEvents[index]),
-            separatorBuilder: (context, index) {
-           return SizedBox(height: 16);
-          },
-          ),
+          Expanded(
+            child: ListView.separated(
+              itemCount: favoriteEvents.length,
+              itemBuilder: (context, index) =>
+                  EventItem(event: favoriteEvents[index]),
+              separatorBuilder: (context, index) {
+                return SizedBox(height: 16);
+              },
             ),
+          ),
         ],
       ),
     );

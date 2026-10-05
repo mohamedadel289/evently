@@ -1,6 +1,5 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/home_screen.dart';
-import 'package:evently/models/user_model.dart';
 import 'package:evently/provider/events_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/forget_password.dart';
@@ -55,12 +54,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: 'Enter your email',
                     prefixIcon: 'email',
                     controller: emailController,
-                    validator:(value){
-                      if(value==null||value.length<3){
+                    validator: (value) {
+                      if (value == null || value.length < 3) {
                         return 'invalid email';
                       }
                       return null;
-                    }
+                    },
                   ),
                   SizedBox(height: 16),
                   DefaultTextFormField(
@@ -68,20 +67,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     prefixIcon: 'lock',
                     ispassword: true,
                     controller: passwordController,
-                    validator:(value){
-                      if(value==null||value.length<8){
+                    validator: (value) {
+                      if (value == null || value.length < 8) {
                         return 'invalid password';
                       }
                       return null;
-                    }
+                    },
                   ),
                   SizedBox(height: 8),
                   TextButton(
-                    style: TextButton.styleFrom(alignment: Alignment.centerRight),
+                    style: TextButton.styleFrom(
+                      alignment: Alignment.centerRight,
+                    ),
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => ForgetPasswordScreen(),
-                      ));
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => ForgetPasswordScreen(),
+                        ),
+                      );
                     },
                     child: Text(
                       'Forgot Password?',
@@ -104,15 +107,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: theme.textTheme.titleSmall,
                       ),
                       TextButton(
-                        style: TextButton.styleFrom(padding: EdgeInsets.zero,minimumSize: Size.zero,), //tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: Size.zero,
+                        ), //tapTargetSize: MaterialTapTargetSize.shrinkWrap),
                         child: Text('Register'),
                         onPressed: () {
-                          //Navigator.of(context).push( 
-                            //MaterialPageRoute(
-                              //builder: (context) => RegisterScreen(),
-                            //),
+                          //Navigator.of(context).push(
+                          //MaterialPageRoute(
+                          //builder: (context) => RegisterScreen(),
+                          //),
                           //);
-                          Navigator.of(context).pushReplacementNamed(RegisterScreen.routeName);
+                          Navigator.of(
+                            context,
+                          ).pushReplacementNamed(RegisterScreen.routeName);
                         },
                       ),
                     ],
@@ -160,6 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
   Future<void> login() async {
     if (!formkey.currentState!.validate()) return;
 
@@ -182,25 +191,21 @@ class _LoginScreenState extends State<LoginScreen> {
       UiUtils.showErrorMessage(error.toString());
     }
   }
+
   void googlelogin() async {
     try {
-    
-      UserModel? user = await firebase_services.loginwithGoogle();
-
-     
-      if (user == null) return;
-
-      if (!mounted) return;
-
-    
+      final user = await firebase_services.loginwithGoogle();
+      if (user == null || !mounted) return;
       Provider.of<UserProvider>(context, listen: false).setCurrentUser(user);
+      await Provider.of<eventsProvider>(context, listen: false).getEvents();
+      if (!mounted) return;
       Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     } catch (error) {
-      String? errorMessage;
-      if (error is FirebaseAuthException) {
-        errorMessage = error.message;
-      }
-      UiUtils.showErrorMessage(errorMessage ?? 'Google login failed');
+      if (!mounted) return;
+      final errorMessage = error is FirebaseAuthException
+          ? error.message
+          : error.toString().replaceFirst('Exception: ', '');
+      UiUtils.showErrorMessage(errorMessage ?? 'Google sign-in failed');
     }
   }
 }

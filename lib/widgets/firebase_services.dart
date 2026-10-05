@@ -109,45 +109,54 @@ class firebase_services {
     });
   }
 
-  static Future<UserModel?> loginwithGoogle() async {
-    // 1. السطر ده هو اللي بيفتح Bottom Sheet لاختيار الإيميل من الجهاز
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-    // لو المستخدم قفل الشاشة بدون ما يختار إيميل
+  static Future<User?> _googleAuth() async {
+    final googleSignIn = GoogleSignIn();
+    // Clear the cached Google account so the account picker is shown each time.
+    await googleSignIn.signOut();
+    final googleUser = await googleSignIn.signIn();
     if (googleUser == null) return null;
 
-    // 2. استخراج التوكن للتوثيق مع فايربيز
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
+    final auth = await googleUser.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: auth.accessToken,
+      idToken: auth.idToken,
     );
+    return (await FirebaseAuth.instance.signInWithCredential(credential)).user;
+  }
 
-    // 3. إتمام الدخول في FirebaseAuth
-    UserCredential userCredential = await FirebaseAuth.instance
-        .signInWithCredential(credential);
+  static Future<UserModel?> loginwithGoogle() async {
+    final user = await _googleAuth();
+    if (user == null) return null;
 
-    // 4. جلب أو حفظ بيانات اليوزر في Firestore
-    final usercollection = getusercollection();
-    final docSnapshot = await usercollection
-        .doc(userCredential.user!.uid)
-        .get();
+    final ref = getusercollection().doc(user.uid);
+    final doc = await ref.get();
+    if (doc.exists && doc.data() != null) return doc.data();
 
-    if (!docSnapshot.exists || docSnapshot.data() == null) {
-      final fallbackUser = UserModel(
-        id: userCredential.user!.uid,
-        name:
-            userCredential.user!.displayName ??
-            googleUser.displayName ??
-            (userCredential.user!.email ?? '').split('@').first,
-        email: userCredential.user!.email ?? googleUser.email,
-        favoriteeventID: [],
-      );
-      await usercollection.doc(fallbackUser.id).set(fallbackUser);
-      return fallbackUser;
-    }
+    final newUser = UserModel(
+      id: user.uid,
+      name: user.displayName ?? user.email?.split('@').first ?? '',
+      email: user.email ?? '',
+      favoriteeventID: [],
+    );
+    await ref.set(newUser);
+    return newUser;
+  }
 
-    return docSnapshot.data()!;
+  static Future<UserModel?> signupwithGoogle() async {
+    final user = await _googleAuth();
+    if (user == null) return null;
+
+    final ref = getusercollection().doc(user.uid);
+    final doc = await ref.get();
+    if (doc.exists) return doc.data(); //
+
+    final newUser = UserModel(
+      id: user.uid,
+      name: user.displayName ?? '',
+      email: user.email ?? '',
+      favoriteeventID: [],
+    );
+    await ref.set(newUser);
+    return newUser;
   }
 }
