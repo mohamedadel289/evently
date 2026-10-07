@@ -44,7 +44,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: theme.appBarTheme.backgroundColor,
+        backgroundColor:isDarkMode ? AppTheme.navy : AppTheme.white,
         title: Text('Add Event'),
       ),
       body: Padding(
