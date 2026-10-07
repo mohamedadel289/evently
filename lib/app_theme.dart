@@ -13,11 +13,14 @@ class AppTheme {
   static const Color red = Color(0xFFFF3232);
   static const Color lightgray = Color(0xFFE9EAEB);
   static const Color green = Color(0xFF00C853);
+  static const Color borderdark = Color(0xFF002D8F);
+  static const Color navy = Color(0xFF001440);
   static ThemeData lightTheme = ThemeData(
     primaryColor: primaryLight,
     scaffoldBackgroundColor: backgroundLight,
     appBarTheme: AppBarTheme(
       backgroundColor: primaryLight,
+      foregroundColor: black,
       titleTextStyle: TextStyle(
         color: black,
         fontSize: 18,
@@ -120,5 +123,112 @@ class AppTheme {
       ),
     ),
   );
-  static ThemeData darkTheme = ThemeData();
+  static ThemeData darkTheme = ThemeData(
+    primaryColor: primaryDark,
+    scaffoldBackgroundColor: backgroundDark,
+    appBarTheme: AppBarTheme(
+      backgroundColor: navy,
+      foregroundColor: white,
+      titleTextStyle: TextStyle(
+        color: white,
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+      ),
+      centerTitle: true,
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: backgroundDark,
+      selectedItemColor: primaryDark,
+      unselectedItemColor: grey,
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: primaryDark,
+    ),
+    textTheme: TextTheme(
+      titleSmall: TextStyle(
+        color: offwhite,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+      ),
+      titleMedium: TextStyle(
+        color: white,
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+      ),
+      titleLarge: TextStyle(
+        color: white,
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+      ),
+       headlineMedium: TextStyle(
+        color: white,
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: navy,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: borderdark),
+      ),
+        focusedBorder: OutlineInputBorder(
+         borderRadius: BorderRadius.circular(16),
+       borderSide: BorderSide(color: borderdark),
+      ),
+         errorBorder: OutlineInputBorder(
+         borderRadius: BorderRadius.circular(16),
+       borderSide: BorderSide(color: red),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+         borderRadius: BorderRadius.circular(16),
+       borderSide: BorderSide(color: red),
+      ),
+      
+      hintStyle: TextStyle(
+        color: offwhite,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+      ),
+       
+    ),
+    listTileTheme: ListTileThemeData(
+      titleTextStyle: TextStyle(
+        color: white,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ), 
+      tileColor: navy,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: borderdark)
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: primaryDark,
+        textStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          decoration: TextDecoration.underline,
+        ),
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+    
+        backgroundColor: primaryDark,
+        foregroundColor: white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        textStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    ),
+  );
 }

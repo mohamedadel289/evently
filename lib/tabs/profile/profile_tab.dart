@@ -1,5 +1,6 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/models/Language_model.dart';
+import 'package:evently/provider/setting_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/login_screen.dart';
 import 'package:evently/widgets/firebase_services.dart';
@@ -14,6 +15,7 @@ class ProfileTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context, listen: false).currentUser;
     final textTheme = Theme.of(context).textTheme;
+    SettingProvider settingProvider = Provider.of<SettingProvider>(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -30,17 +32,26 @@ class ProfileTab extends StatelessWidget {
           SizedBox(height: 32),
           SwitchListTile(
             title: Text('Dark Mode', style: textTheme.titleMedium),
-            value: false,
-            onChanged: (value) {},
+            value: settingProvider
+                .isDarkMode, // You can replace this with the actual value from your SettingProvider
+            onChanged: (isDarkMode) {
+              settingProvider.changeTheme(
+                isDarkMode ? ThemeMode.dark : ThemeMode.light,
+              );
+            },
             thumbColor: WidgetStatePropertyAll(AppTheme.white),
-            trackColor: WidgetStatePropertyAll(AppTheme.lightgray),
+            trackColor: WidgetStatePropertyAll(
+              settingProvider.isDarkMode
+                  ? AppTheme.primaryDark
+                  : AppTheme.lightgray,
+            ),
             trackOutlineColor: WidgetStatePropertyAll(Colors.transparent),
           ),
           SizedBox(height: 16),
           ListTile(
             title: Text('Language'),
             trailing: DropdownButton(
-            borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16),
               dropdownColor: AppTheme.white,
               underline: SizedBox(),
               value: 'en',
@@ -66,10 +77,15 @@ class ProfileTab extends StatelessWidget {
             ),
             onTap: () {
               firebase_services.logout().then((_) {
-                Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
-                Provider.of<UserProvider>(context, listen: false).setCurrentUser(null);
+                Navigator.of(
+                  context,
+                ).pushReplacementNamed(LoginScreen.routeName);
+                Provider.of<UserProvider>(
+                  context,
+                  listen: false,
+                ).setCurrentUser(null);
               });
-            }
+            },
           ),
         ],
       ),

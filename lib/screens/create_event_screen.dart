@@ -1,6 +1,7 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/models/Event_Model.dart';
 import 'package:evently/models/categories_model.dart';
+import 'package:evently/provider/setting_provider.dart';
 import 'package:evently/tabs/home/tab_items.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
 import 'package:evently/widgets/firebase_services.dart';
@@ -8,6 +9,7 @@ import 'package:evently/widgets/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class CreateEventScreen extends StatefulWidget {
   static const String routeName = 'create_event_screen';
@@ -37,11 +39,12 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Provider.of<SettingProvider>(context, listen: false).isDarkMode;
     ThemeData theme = Theme.of(context);
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: AppTheme.backgroundLight,
+        backgroundColor: theme.appBarTheme.backgroundColor,
         title: Text('Add Event'),
       ),
       body: Padding(
@@ -93,7 +96,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 Text(
                   'Title',
                   style: theme.textTheme.titleMedium?.copyWith(
-                    color: AppTheme.black,
+                    color: isDarkMode ? AppTheme.white : AppTheme.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -113,7 +116,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 Text(
                   'Description',
                   style: theme.textTheme.titleMedium?.copyWith(
-                    color: AppTheme.black,
+                    color: isDarkMode ? AppTheme.white : AppTheme.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -142,7 +145,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     Text(
                       'Event Date',
                       style: theme.textTheme.titleMedium?.copyWith(
-                        color: AppTheme.black,
+                        color: isDarkMode ? AppTheme.white : AppTheme.black,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -186,7 +189,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     Text(
                       'Event Time',
                       style: theme.textTheme.titleMedium?.copyWith(
-                        color: AppTheme.black,
+                        color: isDarkMode ? AppTheme.white : AppTheme.black,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

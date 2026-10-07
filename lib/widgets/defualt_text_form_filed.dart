@@ -1,3 +1,4 @@
+import 'package:evently/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -74,6 +75,7 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
                 ),
               ),
       ),
+      style: Theme.of(context).textTheme.titleSmall,
     );
   }
 }

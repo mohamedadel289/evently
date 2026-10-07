@@ -1,5 +1,7 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/provider/setting_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TabItems extends StatelessWidget {
   IconData icon;
@@ -14,25 +16,33 @@ class TabItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Provider.of<SettingProvider>(
+      context,
+      listen: false,
+    ).isDarkMode;
+
     Color primaryColor = Theme.of(context).primaryColor;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: isSelected ? primaryColor : AppTheme.white,
-        border: Border.all(color: AppTheme.offwhite),
+        color: isSelected
+            ? primaryColor
+            : (isDarkMode ? AppTheme.navy : AppTheme.white),
+        border: Border.all(
+          color: isSelected ? (isDarkMode ?Colors.transparent:AppTheme.offwhite): (isDarkMode ? AppTheme.borderdark : AppTheme.offwhite),
+        ),
       ),
       child: Row(
         children: [
-          Icon(
-            icon,
-            color: isSelected ? AppTheme.white : primaryColor,
-          ),
+          Icon(icon, color: isSelected ? AppTheme.white : primaryColor),
           SizedBox(width: 8),
           Text(
             title,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: isSelected ? AppTheme.white : AppTheme.black,
+              color: isSelected
+                  ? AppTheme.white
+                  : (isDarkMode ? AppTheme.white : AppTheme.black),
             ),
           ),
         ],
