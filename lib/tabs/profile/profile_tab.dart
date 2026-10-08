@@ -4,6 +4,7 @@ import 'package:evently/provider/setting_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/login_screen.dart';
 import 'package:evently/widgets/firebase_services.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ class ProfileTab extends StatelessWidget {
     final user = Provider.of<UserProvider>(context, listen: false).currentUser;
     final textTheme = Theme.of(context).textTheme;
     SettingProvider settingProvider = Provider.of<SettingProvider>(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -31,7 +33,7 @@ class ProfileTab extends StatelessWidget {
           Text(user?.email ?? 'guest@example.com', style: textTheme.titleSmall),
           SizedBox(height: 32),
           SwitchListTile(
-            title: Text('Dark Mode', style: textTheme.titleMedium),
+            title: Text(l10n.darkMode, style: textTheme.titleMedium),
             value: settingProvider
                 .isDarkMode, // You can replace this with the actual value from your SettingProvider
             onChanged: (isDarkMode) {
@@ -49,7 +51,7 @@ class ProfileTab extends StatelessWidget {
           ),
           SizedBox(height: 16),
           ListTile(
-            title: Text('Language'),
+            title: Text(l10n.language),
             trailing: DropdownButton(
               borderRadius: BorderRadius.circular(16),
               dropdownColor: settingProvider.isDarkMode ? AppTheme.navy : AppTheme.lightgray,
@@ -69,7 +71,7 @@ class ProfileTab extends StatelessWidget {
           ),
           SizedBox(height: 16),
           ListTile(
-            title: Text('Logout'),
+            title: Text(l10n.logout),
             trailing: SvgPicture.asset(
               'assets/icons/logout-02.svg',
               width: 24,

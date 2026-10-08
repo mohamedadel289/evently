@@ -3,6 +3,7 @@ import 'package:evently/provider/setting_provider.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
 import 'package:evently/widgets/elvated_button.dart';
 import 'package:evently/widgets/firebase_services.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +23,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     SettingProvider settingProvider = Provider.of<SettingProvider>(context);
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: settingProvider.isDarkMode ? AppTheme.navy : AppTheme.lightgray,
-        title: Text('Forget Password',style: Theme.of(context).textTheme.titleLarge?.copyWith(
+        title: Text(l10n.forgetPassword,style: Theme.of(context).textTheme.titleLarge?.copyWith(
           fontSize: 18,
           color: settingProvider.isDarkMode ? AppTheme.white : AppTheme.black),),
       ),
@@ -42,17 +44,17 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 
                 ),
                 DefaultTextFormField(
-                  hintText: 'Enter your email',
+                  hintText: l10n.enterEmail,
                   prefixIcon: 'email',
                   controller: emailController,
                   validator: (value) {
                     if (value == null || value.length < 3) {
-                      return 'invalid email';
+                      return l10n.invalidEmail;
                       
                     }
                     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                       if (!emailRegex.hasMatch(value.trim())) {
-                        return 'Invalid email address';
+                        return l10n.invalidEmailAddress;
                       }
                     
                     return null;
@@ -62,7 +64,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 SizedBox(
                   width: 380,
                   child: ElvatedButton(
-                    text: 'Reset Password',
+                    text: l10n.resetPassword,
                     onPressed: resetpassword,
                       
                     
@@ -81,11 +83,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       try{
         await firebase_services.restpassword(emailController.text);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Password reset email sent. Please check your inbox.')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.passwordResetSent)),
         );
       }catch(e){
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${e.toString()}')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.errorPrefix(e))),
         );
       }
     }

@@ -6,7 +6,9 @@ import 'package:evently/provider/events_provider.dart';
 import 'package:evently/provider/setting_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/create_event_screen.dart';
+import 'package:evently/screens/final_onbording_screen.dart';
 import 'package:evently/screens/forget_password.dart';
+import 'package:evently/screens/intro_onbording.dart';
 import 'package:evently/screens/login_screen.dart';
 import 'package:evently/screens/register_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -37,13 +39,15 @@ class evently extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: setting.theme, // Use the system theme mode
      routes: {
-      HomeScreen.routeName:(_) => HomeScreen(),
-      CreateEventScreen.routeName:(_) =>  CreateEventScreen(),
+     // HomeScreen.routeName:(_) => HomeScreen(),
+     // CreateEventScreen.routeName:(_) =>  CreateEventScreen(),
       LoginScreen.routeName:(_)=> LoginScreen(),
-      RegisterScreen.routeName:(_)=> RegisterScreen(),
-     ForgetPasswordScreen.routeName:(_)=> ForgetPasswordScreen(),
+     // RegisterScreen.routeName:(_)=> RegisterScreen(),
+     //ForgetPasswordScreen.routeName:(_)=> ForgetPasswordScreen(),
+      IntroOnbording.routeName:(_)=> IntroOnbording(),
+      FinalOnbordingScreen.routeName:(_)=> FinalOnbordingScreen(),
      },
-     initialRoute: LoginScreen.routeName,
+     initialRoute: IntroOnbording.routeName,
     localizationsDelegates:AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
       locale:Locale(setting.languagecode),

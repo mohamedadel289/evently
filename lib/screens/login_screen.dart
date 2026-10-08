@@ -1,6 +1,5 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/home_screen.dart';
-import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/provider/events_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/forget_password.dart';
@@ -9,6 +8,7 @@ import 'package:evently/widgets/defualt_text_form_filed.dart';
 import 'package:evently/widgets/elvated_button.dart';
 import 'package:evently/widgets/firebase_services.dart';
 import 'package:evently/widgets/ui_utils.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -47,17 +48,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 40),
                   Text(
-                    'Login to your account',
+                    l10n.loginToAccount,
                     style: theme.textTheme.headlineMedium,
                   ),
                   SizedBox(height: 24),
                   DefaultTextFormField(
-                    hintText: 'Enter your email',
+                    hintText: l10n.enterEmail,
                     prefixIcon: 'email',
                     controller: emailController,
                     validator: (value) {
                       if (value == null || value.length < 3) {
-                        return 'invalid email';
+                        return l10n.invalidEmail;
                       }
                        final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                   if (!emailRegex.hasMatch(value.trim())) {
@@ -68,13 +69,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 16),
                   DefaultTextFormField(
-                    hintText: 'Enter your password',
+                    hintText: l10n.enterPassword,
                     prefixIcon: 'lock',
                     ispassword: true,
                     controller: passwordController,
                     validator: (value) {
                       if (value == null || value.length < 8) {
-                        return 'invalid password';
+                        return l10n.invalidPassword;
                       }
                       return null;
                     },
@@ -90,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     },
                     child: Text(
-                      'Forgot Password?',
+                      l10n.forgotPassword,
                       style: theme.textTheme.titleSmall?.copyWith(
                         color: AppTheme.primaryLight,
                         fontWeight: FontWeight.w600,
@@ -106,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Don\'t have an account?',
+                        l10n.dontHaveAccount,
                         style: theme.textTheme.titleSmall,
                       ),
                       TextButton(
@@ -131,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 32),
                   Text(
-                    'Or',
+                    l10n.or,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: AppTheme.primaryLight,
@@ -153,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       googlelogin();
                     },
                     label: Text(
-                      'Login with Google',
+                      l10n.loginWithGoogle,
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: AppTheme.primaryLight,
                       ),

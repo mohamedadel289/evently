@@ -16,6 +16,7 @@ class AppTheme {
   static const Color borderdark = Color(0xFF002D8F);
   static const Color navy = Color(0xFF001440);
   static ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
     primaryColor: primaryLight,
     scaffoldBackgroundColor: backgroundLight,
     appBarTheme: AppBarTheme(
@@ -53,7 +54,7 @@ class AppTheme {
         fontSize: 20,
         fontWeight: FontWeight.w500,
       ),
-       headlineMedium: TextStyle(
+      headlineMedium: TextStyle(
         color: primaryLight,
         fontSize: 24,
         fontWeight: FontWeight.w600,
@@ -66,36 +67,35 @@ class AppTheme {
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: offwhite),
       ),
-        focusedBorder: OutlineInputBorder(
-         borderRadius: BorderRadius.circular(16),
-       borderSide: BorderSide(color: offwhite),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: offwhite),
       ),
-         errorBorder: OutlineInputBorder(
-         borderRadius: BorderRadius.circular(16),
-       borderSide: BorderSide(color: red),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: red),
       ),
       focusedErrorBorder: OutlineInputBorder(
-         borderRadius: BorderRadius.circular(16),
-       borderSide: BorderSide(color: red),
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: red),
       ),
-      
+
       hintStyle: TextStyle(
         color: darkgray,
         fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
-       
     ),
     listTileTheme: ListTileThemeData(
       titleTextStyle: TextStyle(
         color: black,
         fontSize: 16,
         fontWeight: FontWeight.w500,
-      ), 
+      ),
       tileColor: white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: offwhite)
+        side: BorderSide(color: offwhite),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -110,20 +110,17 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-    
         backgroundColor: primaryLight,
         foregroundColor: white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
-        textStyle: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-        ),
+        textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
       ),
     ),
   );
   static ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
     primaryColor: primaryDark,
     scaffoldBackgroundColor: backgroundDark,
     appBarTheme: AppBarTheme(
@@ -161,7 +158,7 @@ class AppTheme {
         fontSize: 20,
         fontWeight: FontWeight.w500,
       ),
-       headlineMedium: TextStyle(
+      headlineMedium: TextStyle(
         color: white,
         fontSize: 24,
         fontWeight: FontWeight.w600,
@@ -174,36 +171,35 @@ class AppTheme {
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: borderdark),
       ),
-        focusedBorder: OutlineInputBorder(
-         borderRadius: BorderRadius.circular(16),
-       borderSide: BorderSide(color: borderdark),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: borderdark),
       ),
-         errorBorder: OutlineInputBorder(
-         borderRadius: BorderRadius.circular(16),
-       borderSide: BorderSide(color: red),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: red),
       ),
       focusedErrorBorder: OutlineInputBorder(
-         borderRadius: BorderRadius.circular(16),
-       borderSide: BorderSide(color: red),
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: red),
       ),
-      
+
       hintStyle: TextStyle(
         color: offwhite,
         fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
-       
     ),
     listTileTheme: ListTileThemeData(
       titleTextStyle: TextStyle(
         color: white,
         fontSize: 16,
         fontWeight: FontWeight.w500,
-      ), 
+      ),
       tileColor: navy,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: borderdark)
+        side: BorderSide(color: borderdark),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -218,16 +214,12 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-    
         backgroundColor: primaryDark,
         foregroundColor: white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
-        textStyle: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-        ),
+        textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
       ),
     ),
   );

@@ -6,6 +6,7 @@ import 'package:evently/tabs/home/tab_items.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
 import 'package:evently/widgets/firebase_services.dart';
 import 'package:evently/widgets/ui_utils.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
@@ -41,11 +42,12 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   Widget build(BuildContext context) {
     bool isDarkMode = Provider.of<SettingProvider>(context, listen: false).isDarkMode;
     ThemeData theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor:isDarkMode ? AppTheme.navy : AppTheme.white,
-        title: Text('Add Event'),
+        title: Text(l10n.addEvent),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -94,7 +96,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                   ),
                 ),
                 Text(
-                  'Title',
+                  l10n.title,
                   style: theme.textTheme.titleMedium?.copyWith(
                     color: isDarkMode ? AppTheme.white : AppTheme.black,
                     fontWeight: FontWeight.w500,
@@ -103,10 +105,10 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 SizedBox(height: 8),
                 DefaultTextFormField(
                   controller: titleController,
-                  hintText: 'Event Title',
+                  hintText: l10n.eventTitle,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter event title';
+                      return l10n.pleaseEnterEventTitle;
                     }
                     return null;
                   },
@@ -114,7 +116,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
 
                 SizedBox(height: 16),
                 Text(
-                  'Description',
+                  l10n.description,
                   style: theme.textTheme.titleMedium?.copyWith(
                     color: isDarkMode ? AppTheme.white : AppTheme.black,
                     fontWeight: FontWeight.w500,
@@ -123,11 +125,11 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 SizedBox(height: 8),
                 DefaultTextFormField(
                   controller: descriptionController,
-                  hintText: 'Event Description',
+                  hintText: l10n.eventDescription,
                   maxLines: 5,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter event description';
+                      return l10n.pleaseEnterEventDescription;
                     }
                     return null;
                   },
@@ -143,7 +145,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     ),
                     SizedBox(width: 8),
                     Text(
-                      'Event Date',
+                      l10n.eventDate,
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: isDarkMode ? AppTheme.white : AppTheme.black,
                         fontWeight: FontWeight.w500,
@@ -166,7 +168,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                       },
                       child: Text(
                         selectedDate == null
-                            ? 'Choose date'
+                            ? l10n.chooseDate
                             : dateFormat.format(selectedDate!),
                         style: theme.textTheme.titleSmall?.copyWith(
                           color: AppTheme.primaryLight,
@@ -187,7 +189,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     ),
                     SizedBox(width: 8),
                     Text(
-                      'Event Time',
+                      l10n.eventTime,
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: isDarkMode ? AppTheme.white : AppTheme.black,
                         fontWeight: FontWeight.w500,
@@ -207,7 +209,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                       },
                       child: Text(
                         selectedTime == null
-                            ? 'Choose time'
+                            ? l10n.chooseTime
                             : selectedTime!.format(context),
                         style: theme.textTheme.titleSmall?.copyWith(
                           color: AppTheme.primaryLight,
@@ -228,7 +230,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                   ),
-                  child: Text('Add Event'),
+                  child: Text(l10n.addEvent),
                 ),
               ],
             ),

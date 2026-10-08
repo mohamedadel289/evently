@@ -7,6 +7,7 @@ import 'package:evently/widgets/defualt_text_form_filed.dart';
 import 'package:evently/widgets/elvated_button.dart';
 import 'package:evently/widgets/firebase_services.dart';
 import 'package:evently/widgets/ui_utils.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -48,62 +50,62 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 48),
                   Text(
-                    'Create an account',
+                    l10n.createAccountTitle,
                     style: theme.textTheme.headlineMedium,
                   ),
                   SizedBox(height: 24),
                   DefaultTextFormField(
-                    hintText: 'Enter your name',
+                    hintText: l10n.enterName,
                     prefixIcon: 'user',
                     controller: nameController,
                     validator:(value){
                       if(value ==null ||value.length<3){
-                        return 'Invalid name';
+                        return l10n.invalidName;
                       }
                       return null;
                     }
                   ),
                   SizedBox(height: 16),
                   DefaultTextFormField(
-                    hintText: 'Enter your email',
+                    hintText: l10n.enterEmail,
                     prefixIcon: 'email',
                     controller: emailController,
                     validator:(value){
                       if(value ==null ||!value.contains('@')){
-                        return 'Invalid email';
+                        return l10n.invalidEmail;
                       }
                        final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                   if (!emailRegex.hasMatch(value.trim())) {
-                    return 'Invalid email address';
+                    return l10n.invalidEmailAddress;
                   }
                       return null;
                     }
                   ),
                   SizedBox(height: 16),
                   DefaultTextFormField(
-                    hintText: 'Enter your password',
+                    hintText: l10n.enterPassword,
                     prefixIcon: 'lock',
                     ispassword: true,
                     controller: passwordController,
                     validator:(value){
                       if(value ==null ||value.length<8){
-                        return 'Invalid password';
+                        return l10n.invalidPassword;
                       }
                       return null;
                     }
                   ),
                   SizedBox(height: 16),
                   DefaultTextFormField(
-                    hintText: 'Confirm your password',
+                    hintText: l10n.confirmYourPassword,
                     prefixIcon: 'lock',
                     ispassword: true,
                     controller: confirmPasswordController,
                     validator:(value){
                       if(value == null || value.isEmpty){
-                        return 'Please confirm your password';
+                        return l10n.pleaseConfirmPassword;
                       }
                       if(value != passwordController.text){
-                        return 'Passwords do not match';
+                        return l10n.passwordsDoNotMatch;
                       }
                       return null;
                     }
@@ -111,13 +113,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(height: 8),
               
                   SizedBox(height: 48),
-                  ElvatedButton(text: 'Register', onPressed: register),
+                  ElvatedButton(text: l10n.register, onPressed: register),
                   SizedBox(height: 48),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Already have an account?',
+                        l10n.dontHaveAccount,
                         style: theme.textTheme.titleSmall,
                       ),
                       TextButton(
@@ -125,7 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           padding: EdgeInsets.zero,
                           minimumSize: Size.zero,
                         ), //tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                        child: Text('Login'),
+                        child: Text(l10n.login),
                         onPressed: () {
                           //Navigator.of(context).push(
                           //MaterialPageRoute(
@@ -139,7 +141,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 32),
                   Text(
-                    'Or',
+                    l10n.or,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: AppTheme.primaryLight,
@@ -160,7 +162,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     onPressed: registerWithGoogle,
                     label: Text(
-                      'Sign Up with Google',
+                      l10n.signUpWithGoogle,
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: AppTheme.primaryLight,
                       ),

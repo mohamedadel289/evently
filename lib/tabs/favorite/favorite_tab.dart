@@ -2,6 +2,7 @@ import 'package:evently/provider/events_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
 import 'package:evently/widgets/event_item.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,13 +22,14 @@ class _FavoriteTabState extends State<FavoriteTab> {
     final favoriteEvents = eventProvider.events
         .where((event) => favoriteEventIds.contains(event.id))
         .toList();
+    final l10n = AppLocalizations.of(context)!;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         children: [
           DefaultTextFormField(
-            hintText: 'Search for event',
+            hintText: l10n.searchForEvent,
             sufixIcon: 'search',
           ),
           SizedBox(height: 16),

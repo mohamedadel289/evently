@@ -3,6 +3,7 @@ import 'package:evently/provider/events_provider.dart';
 import 'package:evently/provider/setting_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/tabs/home/tab_items.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,13 +21,14 @@ class _HomeHeaderState extends State<HomeHeader> {
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context, listen: false).currentUser;
     final theme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Welcome Back ✨', style: theme.titleMedium),
+        Text(l10n.welcomeBack, style: theme.titleMedium),
         SizedBox(height: 4),
-        Text(user?.name ?? 'Guest', style: theme.titleLarge),
+        Text(user?.name ?? l10n.guest, style: theme.titleLarge),
         DefaultTabController(
           length: CategoriesModel.Categories.length + 1,
           child: TabBar(
@@ -52,7 +54,7 @@ class _HomeHeaderState extends State<HomeHeader> {
             tabAlignment: .start,
             tabs: [
               TabItems(
-                title: 'All',
+                title: l10n.all,
                 icon: Icons.category_outlined,
                 isSelected: currentIndex == 0,
               ),
