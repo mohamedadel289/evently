@@ -1,6 +1,7 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/firebase_options.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/provider/events_provider.dart';
 import 'package:evently/provider/setting_provider.dart';
 import 'package:evently/provider/user_provider.dart';
@@ -33,7 +34,7 @@ class evently extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: setting.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      themeMode: setting.theme, // Use the system theme mode
      routes: {
       HomeScreen.routeName:(_) => HomeScreen(),
       CreateEventScreen.routeName:(_) =>  CreateEventScreen(),
@@ -42,6 +43,9 @@ class evently extends StatelessWidget {
      // ForgetPasswordScreen.routeName:(_)=> ForgetPasswordScreen(),
      },
      initialRoute: LoginScreen.routeName,
+    localizationsDelegates:AppLocalizations.localizationsDelegates,
+    supportedLocales: AppLocalizations.supportedLocales,
+      locale:Locale(setting.languagecode),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:evently/app_theme.dart';
 import 'package:evently/home_screen.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/provider/events_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/forget_password.dart';
@@ -97,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(height: 48),
-                  ElvatedButton(text: 'Login', onPressed: login),
+                  ElvatedButton(text: AppLocalizations.of(context)!.login, onPressed: login),
                   SizedBox(height: 48),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -111,7 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           padding: EdgeInsets.zero,
                           minimumSize: Size.zero,
                         ), //tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                        child: Text('Register'),
+                        child: Text(AppLocalizations.of(context)!.register,
+                      ),
                         onPressed: () {
                           //Navigator.of(context).push(
                           //MaterialPageRoute(
