@@ -72,6 +72,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if(value ==null ||!value.contains('@')){
                         return 'Invalid email';
                       }
+                       final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                  if (!emailRegex.hasMatch(value.trim())) {
+                    return 'Invalid email address';
+                  }
                       return null;
                     }
                   ),

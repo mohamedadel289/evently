@@ -6,6 +6,7 @@ import 'package:evently/provider/events_provider.dart';
 import 'package:evently/provider/setting_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/create_event_screen.dart';
+import 'package:evently/screens/forget_password.dart';
 import 'package:evently/screens/login_screen.dart';
 import 'package:evently/screens/register_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,7 +41,7 @@ class evently extends StatelessWidget {
       CreateEventScreen.routeName:(_) =>  CreateEventScreen(),
       LoginScreen.routeName:(_)=> LoginScreen(),
       RegisterScreen.routeName:(_)=> RegisterScreen(),
-     // ForgetPasswordScreen.routeName:(_)=> ForgetPasswordScreen(),
+     ForgetPasswordScreen.routeName:(_)=> ForgetPasswordScreen(),
      },
      initialRoute: LoginScreen.routeName,
     localizationsDelegates:AppLocalizations.localizationsDelegates,

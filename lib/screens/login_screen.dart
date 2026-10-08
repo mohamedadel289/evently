@@ -59,6 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (value == null || value.length < 3) {
                         return 'invalid email';
                       }
+                       final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                  if (!emailRegex.hasMatch(value.trim())) {
+                    return 'Invalid email address';
+                  }
                       return null;
                     },
                   ),
@@ -81,10 +85,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.centerRight,
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => ForgetPasswordScreen(),
-                        ),
+                      Navigator.of(context).pushNamed(
+                        ForgetPasswordScreen.routeName,
                       );
                     },
                     child: Text(

@@ -88,6 +88,7 @@ class firebase_services {
 
     return docSnapshot.data()!;
   }
+  
 
   static Future<void> addtoEventFavorites(eventId) async {
     CollectionReference<UserModel> usercollection = getusercollection();
@@ -157,5 +158,8 @@ class firebase_services {
     );
     await ref.set(newUser);
     return newUser;
+  }
+  static Future<void> restpassword(String email) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
   }
 }
