@@ -4,6 +4,7 @@ import 'package:evently/tabs/favorite/favorite_tab.dart';
 import 'package:evently/tabs/home/home_tab.dart';
 import 'package:evently/tabs/profile/profile_tab.dart';
 import 'package:evently/widgets/nav_bar_icons.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: SafeArea(child: tabs[currentIndex]),
       bottomNavigationBar: BottomNavigationBar(
@@ -35,19 +37,19 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         items: [
           BottomNavigationBarItem(
-            label: 'Home',
+            label: l10n.home,
             icon: NavBarIcons(iconPath: 'home_unactive'),
             activeIcon: NavBarIcons(iconPath: 'home_active'),
           
           ),
           BottomNavigationBarItem(
-            label: 'Favorites',
+            label: l10n.favorites,
             icon: NavBarIcons(iconPath: 'Favorite_unactive'),
             activeIcon: NavBarIcons(iconPath: 'Favorite_active'),
           ),
           BottomNavigationBarItem(
             icon: NavBarIcons(iconPath: 'profile_unactive'),
-            label: 'Profile',
+            label: l10n.profile,
             activeIcon: NavBarIcons(iconPath: 'profile_active'),
           ),
         ],

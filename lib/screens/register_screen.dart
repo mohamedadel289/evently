@@ -199,7 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           if (error is FirebaseAuthException) {
             errorMessage = error.message;
           }
-          UiUtils.showErrorMessage(errorMessage ?? 'Registration failed');
+          UiUtils.showErrorMessage(errorMessage ?? AppLocalizations.of(context)!.registrationFailed);
         });
   }
   void registerWithGoogle() async {
@@ -215,5 +215,5 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (error is FirebaseAuthException) {
         errorMessage = error.message;
       }
-      UiUtils.showErrorMessage(errorMessage ?? 'Google sign-in failed');
+      UiUtils.showErrorMessage(errorMessage ?? AppLocalizations.of(context)!.googleSignInFailed);
     }}}

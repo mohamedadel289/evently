@@ -3,6 +3,7 @@ import 'package:evently/models/onborading_model.dart';
 import 'package:evently/provider/setting_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:evently/l10n/app_localizations.dart';
 
 class FinalOnbordingScreen extends StatefulWidget {
   static const String routeName = '/FinalOnbordingScreen';
@@ -45,6 +46,7 @@ class _FinalOnbordingScreenState extends State<FinalOnbordingScreen> {
     SettingProvider settingProvider = Provider.of<SettingProvider>(context);
     final primaryColor = Theme.of(context).primaryColor;
     final isDark = settingProvider.isDarkMode;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: SafeArea(
@@ -86,7 +88,7 @@ class _FinalOnbordingScreenState extends State<FinalOnbordingScreen> {
                   TextButton(
                     onPressed: currentIndex == onboardingData.length - 1 ? null : nextPage,
                     child: Text(
-                      currentIndex == onboardingData.length - 1 ? '' : 'Skip',
+                      currentIndex == onboardingData.length - 1 ? '' : l10n.skip,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             fontSize: 16,
                             color: isDark ? AppTheme.white : AppTheme.black,
@@ -110,6 +112,16 @@ class _FinalOnbordingScreenState extends State<FinalOnbordingScreen> {
                   },
                   itemBuilder: (context, index) {
                     final onboardingItem = onboardingData[index];
+                    final title = switch (index) {
+                      0 => l10n.findEventsThatInspireYou,
+                      1 => l10n.effortlessEventPlanning,
+                      _ => l10n.connectWithFriends,
+                    };
+                    final description = switch (index) {
+                      0 => l10n.findEventsDescription,
+                      1 => l10n.effortlessEventPlanningDescription,
+                      _ => l10n.connectWithFriendsDescription,
+                    };
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -139,7 +151,7 @@ class _FinalOnbordingScreenState extends State<FinalOnbordingScreen> {
               ),
                         const SizedBox(height: 24),
                         Text(
-                          onboardingItem.title,
+                          title,
                           textAlign: TextAlign.start,
                           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                 fontSize: 22,
@@ -150,7 +162,7 @@ class _FinalOnbordingScreenState extends State<FinalOnbordingScreen> {
                         
                         const SizedBox(height: 10),
                         Text(
-                          onboardingItem.description,
+                          description,
                           textAlign: TextAlign.start,
                           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                 fontSize: 14,
@@ -182,7 +194,7 @@ class _FinalOnbordingScreenState extends State<FinalOnbordingScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 child: Text(
-                  currentIndex == onboardingData.length - 1 ? "Get Started" : 'Next',
+                  currentIndex == onboardingData.length - 1 ? l10n.letsStart : l10n.next,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

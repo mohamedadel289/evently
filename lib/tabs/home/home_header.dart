@@ -1,6 +1,5 @@
 import 'package:evently/models/categories_model.dart';
 import 'package:evently/provider/events_provider.dart';
-import 'package:evently/provider/setting_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/tabs/home/tab_items.dart';
 import 'package:evently/l10n/app_localizations.dart';
@@ -22,6 +21,12 @@ class _HomeHeaderState extends State<HomeHeader> {
     final user = Provider.of<UserProvider>(context, listen: false).currentUser;
     final theme = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
+    String categoryLabel(String id) => switch (id) {
+      'sport' => l10n.sport,
+      'birthday' => l10n.birthday,
+      'meeting' => l10n.meeting,
+      _ => id,
+    };
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +65,7 @@ class _HomeHeaderState extends State<HomeHeader> {
               ),
               ...CategoriesModel.Categories.map(
                 (Category) => TabItems(
-                  title: Category.label,
+                  title: categoryLabel(Category.id),
                   icon: Category.icon,
                   isSelected:
                       currentIndex - 1 ==

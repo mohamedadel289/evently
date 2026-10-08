@@ -3,6 +3,7 @@ import 'package:evently/provider/setting_provider.dart';
 import 'package:evently/screens/final_onbording_screen.dart';
 import 'package:evently/screens/login_screen.dart';
 import 'package:evently/widgets/elvated_button.dart';
+import 'package:evently/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,7 @@ class IntroOnbording extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SettingProvider settingProvider = Provider.of<SettingProvider>(context);
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -33,14 +35,14 @@ class IntroOnbording extends StatelessWidget {
               ),
               SizedBox(height: 24),
               Text(
-                'Personalize Your Experience',
+                l10n.personalizeExperience,
                 style: Theme.of(
                   context,
                 ).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.w600),
                 textAlign: TextAlign.start,
               ),
               Text(
-                'Choose your preferred theme and\n language to get started with a\n comfortable, tailored experience that suits your style.',
+                l10n.chooseThemeLanguage,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   fontWeight: FontWeight.w400,
                   color: AppTheme.grey,
@@ -52,7 +54,7 @@ class IntroOnbording extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Language',
+                    l10n.language,
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       fontWeight: FontWeight.w500,
                       fontSize: 18,
@@ -60,7 +62,7 @@ class IntroOnbording extends StatelessWidget {
                   ),
                   Spacer(),
                   ChoiceChip(
-                    label: Text('English'),
+                    label: Text(l10n.english),
                     selected: settingProvider.languagecode == 'en',
                     onSelected: (value) {
                       settingProvider.changeLanguage('en');
@@ -75,7 +77,7 @@ class IntroOnbording extends StatelessWidget {
                   ),
                   SizedBox(width: 8),
                   ChoiceChip(
-                    label: Text('Arabic'),
+                    label: Text(l10n.arabic),
                     selected: settingProvider.languagecode == 'ar',
                     onSelected: (value) {
                       settingProvider.changeLanguage('ar');
@@ -95,7 +97,7 @@ class IntroOnbording extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Theme',
+                    l10n.theme,
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       fontWeight: FontWeight.w500,
                       fontSize: 18,
@@ -145,7 +147,7 @@ class IntroOnbording extends StatelessWidget {
               ),
               SizedBox(height: 32),
               ElvatedButton(
-                text: 'Let’s start',
+                text: l10n.letsStart,
                 onPressed: () {
                   Navigator.of(context).pushNamed(FinalOnbordingScreen.routeName);
                 },

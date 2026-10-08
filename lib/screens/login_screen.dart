@@ -190,7 +190,9 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     } on FirebaseAuthException catch (error) {
       if (!mounted) return;
-      UiUtils.showErrorMessage(error.message ?? 'Login failed');
+      UiUtils.showErrorMessage(
+        error.message ?? AppLocalizations.of(context)!.loginFailed,
+      );
     } catch (error) {
       if (!mounted) return;
       UiUtils.showErrorMessage(error.toString());
@@ -210,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
       final errorMessage = error is FirebaseAuthException
           ? error.message
           : error.toString().replaceFirst('Exception: ', '');
-      UiUtils.showErrorMessage(errorMessage ?? 'Google sign-in failed');
+      UiUtils.showErrorMessage(errorMessage ?? AppLocalizations.of(context)!.googleSignInFailed);
     }
   }
 }

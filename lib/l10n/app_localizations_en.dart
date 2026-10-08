@@ -157,4 +157,83 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chooseTime => 'Choose time';
+
+  @override
+  String get personalizeExperience => 'Personalize Your Experience';
+
+  @override
+  String get chooseThemeLanguage =>
+      'Choose your preferred theme and\nlanguage to get started with a\ncomfortable, tailored experience that suits your style.';
+
+  @override
+  String get theme => 'Theme';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get arabic => 'Arabic';
+
+  @override
+  String get letsStart => 'Let\'s start';
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get favorites => 'Favorites';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get eventCreatedSuccessfully => 'Event created successfully';
+
+  @override
+  String get failedToCreateEvent => 'Failed to create event';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong';
+
+  @override
+  String get loginFailed => 'Login failed';
+
+  @override
+  String get googleSignInFailed => 'Google sign-in failed';
+
+  @override
+  String get sport => 'Sport';
+
+  @override
+  String get birthday => 'Birthday';
+
+  @override
+  String get meeting => 'Meeting';
+
+  @override
+  String get findEventsThatInspireYou => 'Find Events That Inspire You';
+
+  @override
+  String get findEventsDescription =>
+      'Dive into a world of events crafted to fit your unique interests. Whether you\'re into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.';
+
+  @override
+  String get effortlessEventPlanning => 'Effortless Event Planning';
+
+  @override
+  String get effortlessEventPlanningDescription =>
+      'Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we\'ve got you covered. Plan with ease and focus on what matters - creating an unforgettable experience for you and your guests.';
+
+  @override
+  String get connectWithFriends => 'Connect with Friends & Share Moments';
+
+  @override
+  String get connectWithFriendsDescription =>
+      'Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.';
 }

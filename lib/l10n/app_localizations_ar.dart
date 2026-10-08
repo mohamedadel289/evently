@@ -157,4 +157,83 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get chooseTime => 'اختر الوقت';
+
+  @override
+  String get personalizeExperience => 'خصص تجربتك';
+
+  @override
+  String get chooseThemeLanguage =>
+      'اختر المظهر واللغة المفضلين لديك\nللبدء بتجربة مريحة ومخصصة\nتناسب أسلوبك.';
+
+  @override
+  String get theme => 'المظهر';
+
+  @override
+  String get english => 'الإنجليزية';
+
+  @override
+  String get arabic => 'العربية';
+
+  @override
+  String get letsStart => 'لنبدأ';
+
+  @override
+  String get skip => 'تخطي';
+
+  @override
+  String get next => 'التالي';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get favorites => 'المفضلة';
+
+  @override
+  String get profile => 'الملف الشخصي';
+
+  @override
+  String get eventCreatedSuccessfully => 'تم إنشاء الفعالية بنجاح';
+
+  @override
+  String get failedToCreateEvent => 'فشل إنشاء الفعالية';
+
+  @override
+  String get somethingWentWrong => 'حدث خطأ ما';
+
+  @override
+  String get loginFailed => 'فشل تسجيل الدخول';
+
+  @override
+  String get googleSignInFailed => 'فشل تسجيل الدخول باستخدام جوجل';
+
+  @override
+  String get sport => 'رياضة';
+
+  @override
+  String get birthday => 'عيد ميلاد';
+
+  @override
+  String get meeting => 'اجتماع';
+
+  @override
+  String get findEventsThatInspireYou => 'اكتشف فعاليات تلهمك';
+
+  @override
+  String get findEventsDescription =>
+      'انغمس في عالم من الفعاليات المصممة لتناسب اهتماماتك الفريدة. سواء كنت تحب الموسيقى الحية أو ورش الفن أو التواصل المهني أو اكتشاف تجارب جديدة، لدينا ما يناسب الجميع. ستساعدك توصياتنا المختارة على الاستكشاف والتواصل والاستفادة من كل فرصة من حولك.';
+
+  @override
+  String get effortlessEventPlanning => 'خطط للفعاليات بسهولة';
+
+  @override
+  String get effortlessEventPlanningDescription =>
+      'تخلص من عناء تنظيم الفعاليات باستخدام أدوات التخطيط المتكاملة. بدءًا من إرسال الدعوات وإدارة تأكيدات الحضور وحتى جدولة التذكيرات وتنسيق التفاصيل، نحن نهتم بكل شيء. خطط بسهولة وركز على ما يهم: إنشاء تجربة لا تُنسى لك ولضيوفك.';
+
+  @override
+  String get connectWithFriends => 'تواصل مع أصدقائك وشارك اللحظات';
+
+  @override
+  String get connectWithFriendsDescription =>
+      'اجعل كل فعالية لا تُنسى من خلال مشاركة التجربة مع الآخرين. يتيح لك تطبيقنا دعوة أصدقائك وإبقاء الجميع على اطلاع والاحتفال باللحظات معًا. التقط الحماس وشاركه مع شبكتك لتستعيد أجمل الذكريات.';
 }

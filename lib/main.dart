@@ -39,11 +39,11 @@ class evently extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: setting.theme, // Use the system theme mode
      routes: {
-     // HomeScreen.routeName:(_) => HomeScreen(),
-     // CreateEventScreen.routeName:(_) =>  CreateEventScreen(),
+     HomeScreen.routeName:(_) => HomeScreen(),
+     CreateEventScreen.routeName:(_) =>  CreateEventScreen(),
       LoginScreen.routeName:(_)=> LoginScreen(),
-     // RegisterScreen.routeName:(_)=> RegisterScreen(),
-     //ForgetPasswordScreen.routeName:(_)=> ForgetPasswordScreen(),
+     RegisterScreen.routeName:(_)=> RegisterScreen(),
+     ForgetPasswordScreen.routeName:(_)=> ForgetPasswordScreen(),
       IntroOnbording.routeName:(_)=> IntroOnbording(),
       FinalOnbordingScreen.routeName:(_)=> FinalOnbordingScreen(),
      },

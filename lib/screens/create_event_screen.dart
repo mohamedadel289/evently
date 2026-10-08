@@ -43,6 +43,12 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
     bool isDarkMode = Provider.of<SettingProvider>(context, listen: false).isDarkMode;
     ThemeData theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
+    String categoryLabel(String id) => switch (id) {
+      'sport' => l10n.sport,
+      'birthday' => l10n.birthday,
+      'meeting' => l10n.meeting,
+      _ => id,
+    };
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -86,7 +92,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     tabAlignment: .start,
                     tabs: CategoriesModel.Categories.map(
                       (Category) => TabItems(
-                        title: Category.label,
+                        title: categoryLabel(Category.id),
                         icon: Category.icon,
                         isSelected:
                             currentIndex ==
@@ -261,10 +267,14 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
           .createEvent(event)
           .then((_) {
             Navigator.of(context).pop();
-            UiUtils.showSuccessMessage('Event created successfully');
+            UiUtils.showSuccessMessage(
+              AppLocalizations.of(context)!.eventCreatedSuccessfully,
+            );
           })
           .catchError((_) {
-            UiUtils.showErrorMessage('Failed to create event');
+            UiUtils.showErrorMessage(
+              AppLocalizations.of(context)!.failedToCreateEvent,
+            );
           });
     }
   }
