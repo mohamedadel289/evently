@@ -217,6 +217,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get meeting => 'Meeting';
 
   @override
+  String get eventDetails => 'Event Details';
+
+  @override
   String get findEventsThatInspireYou => 'Find Events That Inspire You';
 
   @override

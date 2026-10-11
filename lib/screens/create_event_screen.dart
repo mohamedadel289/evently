@@ -2,6 +2,7 @@ import 'package:evently/app_theme.dart';
 import 'package:evently/models/Event_Model.dart';
 import 'package:evently/models/categories_model.dart';
 import 'package:evently/provider/setting_provider.dart';
+import 'package:evently/screens/Add_event.dart';
 import 'package:evently/tabs/home/tab_items.dart';
 import 'package:evently/widgets/defualt_text_form_filed.dart';
 import 'package:evently/widgets/firebase_services.dart';
@@ -266,7 +267,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
       firebase_services
           .createEvent(event)
           .then((_) {
-            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed(editfromevents.routeName,arguments: event);
             UiUtils.showSuccessMessage(
               AppLocalizations.of(context)!.eventCreatedSuccessfully,
             );

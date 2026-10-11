@@ -24,7 +24,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get confirmPassword => 'تأكيد كلمة المرور';
 
   @override
-  String get forgotPassword => 'نسيت كلمة المرور؟';
+  String get forgotPassword => 'نسيت كلمة المرور？';
 
   @override
   String get resetPassword => 'إعادة تعيين كلمة المرور';
@@ -215,6 +215,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get meeting => 'اجتماع';
+
+  @override
+  String get eventDetails => 'تفاصيل الفعالية';
 
   @override
   String get findEventsThatInspireYou => 'اكتشف فعاليات تلهمك';

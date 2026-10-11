@@ -506,6 +506,12 @@ abstract class AppLocalizations {
   /// **'Meeting'**
   String get meeting;
 
+  /// No description provided for @eventDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Details'**
+  String get eventDetails;
+
   /// No description provided for @findEventsThatInspireYou.
   ///
   /// In en, this message translates to:

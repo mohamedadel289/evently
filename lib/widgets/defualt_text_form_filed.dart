@@ -1,6 +1,8 @@
 import 'package:evently/app_theme.dart';
+import 'package:evently/provider/setting_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class DefaultTextFormField extends StatefulWidget {
   TextEditingController? controller;
@@ -32,6 +34,7 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Provider.of<SettingProvider>(context).isDarkMode;
     return TextFormField(
       onChanged: widget.onchanged,
       controller: widget.controller,
@@ -75,7 +78,7 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
                 ),
               ),
       ),
-      style: Theme.of(context).textTheme.titleSmall,
+      style: isDarkMode ? Theme.of(context).textTheme.titleLarge?.copyWith(color: AppTheme.offwhite) : Theme.of(context).textTheme.titleLarge,
     );
   }
 }
