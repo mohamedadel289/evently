@@ -506,6 +506,12 @@ abstract class AppLocalizations {
   /// **'Update Event'**
   String get updateEvent;
 
+  /// No description provided for @editEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Event'**
+  String get editEvent;
+
   /// No description provided for @meeting.
   ///
   /// In en, this message translates to:

@@ -217,6 +217,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get updateEvent => 'تحديث الفعالية';
 
   @override
+  String get editEvent => 'تعديل الفعالية';
+
+  @override
   String get meeting => 'اجتماع';
 
   @override

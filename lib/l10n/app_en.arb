@@ -68,7 +68,7 @@
     "sport": "Sport",
     "birthday": "Birthday",
     "updateEvent": "Update Event",
-    "EditEvent": "Edit Event",
+    "editEvent": "Edit Event",
     "meeting": "Meeting",
     "eventDetails": "Event Details",
     "findEventsThatInspireYou": "Find Events That Inspire You",
