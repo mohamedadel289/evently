@@ -214,6 +214,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get birthday => 'عيد ميلاد';
 
   @override
+  String get updateEvent => 'تحديث الفعالية';
+
+  @override
   String get meeting => 'اجتماع';
 
   @override

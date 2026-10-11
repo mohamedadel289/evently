@@ -7,6 +7,7 @@ import 'package:evently/provider/setting_provider.dart';
 import 'package:evently/provider/user_provider.dart';
 import 'package:evently/screens/Add_event.dart';
 import 'package:evently/screens/create_event_screen.dart';
+import 'package:evently/screens/edit_event_screen.dart';
 import 'package:evently/screens/final_onbording_screen.dart';
 import 'package:evently/screens/forget_password.dart';
 import 'package:evently/screens/intro_onbording.dart';
@@ -48,6 +49,7 @@ class evently extends StatelessWidget {
       IntroOnbording.routeName:(_)=> IntroOnbording(),
       FinalOnbordingScreen.routeName:(_)=> FinalOnbordingScreen(),
       editfromevents.routeName:(_)=> editfromevents(),
+      EditEventScreen.routeName:(_)=> EditEventScreen(),
      },
      initialRoute: IntroOnbording.routeName,
     localizationsDelegates:AppLocalizations.localizationsDelegates,

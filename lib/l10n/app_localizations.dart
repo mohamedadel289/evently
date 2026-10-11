@@ -500,6 +500,12 @@ abstract class AppLocalizations {
   /// **'Birthday'**
   String get birthday;
 
+  /// No description provided for @updateEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Event'**
+  String get updateEvent;
+
   /// No description provided for @meeting.
   ///
   /// In en, this message translates to:

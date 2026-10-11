@@ -67,6 +67,8 @@
     "googleSignInFailed": "Google sign-in failed",
     "sport": "Sport",
     "birthday": "Birthday",
+    "updateEvent": "Update Event",
+    "EditEvent": "Edit Event",
     "meeting": "Meeting",
     "eventDetails": "Event Details",
     "findEventsThatInspireYou": "Find Events That Inspire You",

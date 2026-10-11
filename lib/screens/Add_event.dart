@@ -2,9 +2,12 @@ import 'package:evently/app_theme.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/Event_Model.dart';
 import 'package:evently/models/categories_model.dart';
+import 'package:evently/provider/events_provider.dart';
+import 'package:evently/widgets/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class editfromevents extends StatelessWidget {
   int currentIndex = 0;
@@ -29,8 +32,16 @@ class editfromevents extends StatelessWidget {
               Icons.edit,
               color: isDarkMode ? AppTheme.primaryLight : AppTheme.primaryDark,
             ),
-            onPressed: () {
-              // Handle edit action
+            onPressed: () async{
+              // Navigate to the edit event screen with the event data
+             await Navigator.pushNamed(
+                context,
+                '/EditEventScreen',
+                arguments: event,
+              );
+              if(context.mounted){
+                Navigator.pop(context);
+              }
             },
           ),
           IconButton(
@@ -38,8 +49,13 @@ class editfromevents extends StatelessWidget {
               Icons.delete,
               color: isDarkMode ? AppTheme.red : AppTheme.red,
             ),
-            onPressed: () {
-              // Handle delete action
+            onPressed: () async {
+              
+             await firebase_services.deleteEvent(event!.id);
+              if(context.mounted){
+                await Provider.of<eventsProvider>(context, listen: false).getEvents();
+                Navigator.pop(context);
+              }
             },
           ),
         ],

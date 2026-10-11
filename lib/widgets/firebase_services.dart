@@ -32,7 +32,11 @@ class firebase_services {
     QuerySnapshot<EventModel> querySnapshot = await collection
         .orderBy('date')
         .get();
-    return querySnapshot.docs.map((docSnapshot) => docSnapshot.data()).toList();
+    return querySnapshot.docs.map((docSnapshot) {
+      final event = docSnapshot.data();
+      event.id = docSnapshot.id;
+      return event;
+    }).toList();
   }
 
   static Future<void> logout() async => await FirebaseAuth.instance.signOut();
@@ -161,5 +165,15 @@ class firebase_services {
   }
   static Future<void> restpassword(String email) async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
+  static Future<void> deleteEvent(String eventId) async {
+    CollectionReference<EventModel> collection = getcollection();
+    DocumentReference<EventModel> doc = collection.doc(eventId);
+    await doc.delete();
+  }
+  static Future<void> updateEvent(EventModel event) async {
+    CollectionReference<EventModel> collection = getcollection();
+    DocumentReference<EventModel> doc = collection.doc(event.id);
+    await doc.update(event.toJson());
   }
 }
