@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 class IntroOnbording extends StatelessWidget {
   static const String routeName = '/IntroOnbording';
 
+  const IntroOnbording({super.key});
+
   @override
   Widget build(BuildContext context) {
     SettingProvider settingProvider = Provider.of<SettingProvider>(context);

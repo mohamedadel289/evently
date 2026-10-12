@@ -8,6 +8,8 @@ import 'package:evently/l10n/app_localizations.dart';
 class FinalOnbordingScreen extends StatefulWidget {
   static const String routeName = '/FinalOnbordingScreen';
 
+  const FinalOnbordingScreen({super.key});
+
   @override
   State<FinalOnbordingScreen> createState() => _FinalOnbordingScreenState();
 }

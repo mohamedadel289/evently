@@ -65,7 +65,7 @@ class ProfileTab extends StatelessWidget {
               ).toList(),
               onChanged: (Languagecode) {
                 if (Languagecode == null) return;
-                settingProvider.changeLanguage(Languagecode!);
+                settingProvider.changeLanguage(Languagecode);
               },
             ),
           ),

@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 class editfromevents extends StatelessWidget {
   int currentIndex = 0;
   static const routeName = '/editfromevents';
+
+  editfromevents({super.key});
   @override
   Widget build(BuildContext context) {
     final dateFormat = DateFormat('d MMMM');
@@ -104,13 +106,13 @@ class editfromevents extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                       '${dateFormat.format(event?.date ?? DateTime.now())}',
+                       dateFormat.format(event?.date ?? DateTime.now()),
                         style: isDarkMode
                             ? Theme.of(context).textTheme.titleSmall
                             : Theme.of(context).textTheme.titleSmall?.copyWith(color: AppTheme.backgroundDark),
                       ),
                       Text(
-                        '${timeFormat.format(event?.date ?? DateTime.now())}',
+                        timeFormat.format(event?.date ?? DateTime.now()),
                         style: isDarkMode
                             ? Theme.of(context).textTheme.titleSmall?.copyWith(color: AppTheme.backgroundDark)
                             : Theme.of(context).textTheme.titleSmall,
