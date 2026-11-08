@@ -1,17 +1,29 @@
-# evently
+# Evently
 
-A new Flutter project.
+An event discovery and planning app built with Flutter and Firebase.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Email/password and Google authentication
+- Create, edit, and delete owned events
+- Event categories, favorites, and search
+- Arabic and English localization
+- Light and dark themes
+- Cloud Firestore persistence
 
-A few resources to get you started if this is your first Flutter project:
+## Built with
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+Flutter, Dart, Firebase Authentication, Cloud Firestore, Provider, and Google Sign-In.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Run locally
+
+Configure Firebase for your platform, then run:
+
+```bash
+flutter pub get
+flutter run
+```
+
+## Security note
+
+Firestore rules restrict event changes to the event owner. Firebase API keys are client configuration, but the Firebase project should still have API restrictions and authorized app domains configured.
