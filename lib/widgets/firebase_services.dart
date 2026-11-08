@@ -24,6 +24,7 @@ class firebase_services {
     CollectionReference<EventModel> collection = getcollection();
     DocumentReference<EventModel> doc = collection.doc();
     event.id = doc.id;
+    event.ownerId = FirebaseAuth.instance.currentUser!.uid;
     return doc.set(event);
   }
 

@@ -244,6 +244,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                     if (formKey.currentState!.validate() && event != null) {
                       final updatedEvent = EventModel(
                         id: event!.id,
+                        ownerId: event!.ownerId,
                         title: titleController.text.trim(),
                         description: descriptionController.text.trim(),
                         category: selectedCategory,
