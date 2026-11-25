@@ -1,4 +1,4 @@
-import 'package:evently/home_screen.dart';
+import 'package:evently/features/home/presentation/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
