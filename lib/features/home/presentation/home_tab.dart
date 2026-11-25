@@ -1,6 +1,6 @@
-import 'package:evently/provider/events_provider.dart';
-import 'package:evently/tabs/home/home_header.dart';
-import 'package:evently/widgets/event_item.dart';
+import 'package:evently/features/events/providers/events_provider.dart';
+import 'package:evently/features/home/presentation/home_header.dart';
+import 'package:evently/features/events/presentation/event_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
