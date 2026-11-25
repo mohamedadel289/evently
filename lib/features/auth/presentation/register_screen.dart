@@ -1,30 +1,32 @@
-import 'package:evently/app_theme.dart';
-import 'package:evently/home_screen.dart';
-import 'package:evently/provider/events_provider.dart';
-import 'package:evently/provider/user_provider.dart';
-import 'package:evently/screens/forget_password.dart';
-import 'package:evently/screens/register_screen.dart';
-import 'package:evently/widgets/defualt_text_form_filed.dart';
-import 'package:evently/widgets/elvated_button.dart';
-import 'package:evently/widgets/firebase_services.dart';
-import 'package:evently/widgets/ui_utils.dart';
+import 'package:evently/core/theme/app_theme.dart';
+import 'package:evently/features/home/presentation/home_screen.dart';
+import 'package:evently/features/events/providers/events_provider.dart';
+import 'package:evently/features/auth/providers/user_provider.dart';
+import 'package:evently/features/auth/presentation/login_screen.dart';
+import 'package:evently/core/widgets/default_text_form_field.dart';
+import 'package:evently/core/widgets/elevated_button.dart';
+import 'package:evently/core/data/firebase_services.dart';
+import 'package:evently/core/widgets/ui_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const String routeName = '/LoginScreen';
+class RegisterScreen extends StatefulWidget {
+  static const String routeName = '/RegisterScreen';
 
-  const LoginScreen({super.key});
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -34,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: SingleChildScrollView(
             child: Form(
-              key: formkey,
+              key:formkey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -44,22 +46,34 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 28,
                     fit: BoxFit.scaleDown,
                   ),
-                  SizedBox(height: 40),
+                  SizedBox(height: 48),
                   Text(
-                    'Login to your account',
+                    'Create an account',
                     style: theme.textTheme.headlineMedium,
                   ),
                   SizedBox(height: 24),
                   DefaultTextFormField(
+                    hintText: 'Enter your name',
+                    prefixIcon: 'user',
+                    controller: nameController,
+                    validator:(value){
+                      if(value ==null ||value.length<3){
+                        return 'Invalid name';
+                      }
+                      return null;
+                    }
+                  ),
+                  SizedBox(height: 16),
+                  DefaultTextFormField(
                     hintText: 'Enter your email',
                     prefixIcon: 'email',
                     controller: emailController,
-                    validator: (value) {
-                      if (value == null || value.length < 3) {
-                        return 'invalid email';
+                    validator:(value){
+                      if(value ==null ||!value.contains('@')){
+                        return 'Invalid email';
                       }
                       return null;
-                    },
+                    }
                   ),
                   SizedBox(height: 16),
                   DefaultTextFormField(
@@ -67,43 +81,39 @@ class _LoginScreenState extends State<LoginScreen> {
                     prefixIcon: 'lock',
                     ispassword: true,
                     controller: passwordController,
-                    validator: (value) {
-                      if (value == null || value.length < 8) {
-                        return 'invalid password';
+                    validator:(value){
+                      if(value ==null ||value.length<8){
+                        return 'Invalid password';
                       }
                       return null;
-                    },
+                    }
+                  ),
+                  SizedBox(height: 16),
+                  DefaultTextFormField(
+                    hintText: 'Confirm your password',
+                    prefixIcon: 'lock',
+                    ispassword: true,
+                    controller: confirmPasswordController,
+                    validator:(value){
+                      if(value == null || value.isEmpty){
+                        return 'Please confirm your password';
+                      }
+                      if(value != passwordController.text){
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    }
                   ),
                   SizedBox(height: 8),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      alignment: Alignment.centerRight,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => ForgetPasswordScreen(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      'Forgot Password?',
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        color: AppTheme.primaryLight,
-                        fontWeight: FontWeight.w600,
-                        decoration: TextDecoration.underline,
-                        decorationColor: AppTheme.primaryLight,
-                      ),
-                    ),
-                  ),
+              
                   SizedBox(height: 48),
-                  ElvatedButton(text: 'Login', onPressed: login),
+                  ElvatedButton(text: 'Register', onPressed: register),
                   SizedBox(height: 48),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Don\'t have an account?',
+                        'Already have an account?',
                         style: theme.textTheme.titleSmall,
                       ),
                       TextButton(
@@ -111,16 +121,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           padding: EdgeInsets.zero,
                           minimumSize: Size.zero,
                         ), //tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                        child: Text('Register'),
+                        child: Text('Login'),
                         onPressed: () {
                           //Navigator.of(context).push(
                           //MaterialPageRoute(
                           //builder: (context) => RegisterScreen(),
                           //),
                           //);
-                          Navigator.of(
-                            context,
-                          ).pushReplacementNamed(RegisterScreen.routeName);
+                          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
                         },
                       ),
                     ],
@@ -137,6 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 24),
                   ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
+                      minimumSize: Size.zero,
                       fixedSize: Size(343, 48),
                       backgroundColor: AppTheme.white,
                       foregroundColor: AppTheme.primaryLight,
@@ -145,11 +154,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         side: BorderSide(color: AppTheme.offwhite),
                       ),
                     ),
-                    onPressed: () {
-                      googlelogin();
-                    },
+                    onPressed: registerWithGoogle,
                     label: Text(
-                      'Login with Google',
+                      'Sign Up with Google',
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: AppTheme.primaryLight,
                       ),
@@ -168,44 +175,39 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
-  Future<void> login() async {
+  void register() async {
     if (!formkey.currentState!.validate()) return;
 
-    try {
-      final user = await firebase_services.login(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-
-      if (!mounted) return;
-      Provider.of<UserProvider>(context, listen: false).setCurrentUser(user);
-      await Provider.of<eventsProvider>(context, listen: false).getEvents();
-      if (!mounted) return;
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-    } on FirebaseAuthException catch (error) {
-      if (!mounted) return;
-      UiUtils.showErrorMessage(error.message ?? 'Login failed');
-    } catch (error) {
-      if (!mounted) return;
-      UiUtils.showErrorMessage(error.toString());
-    }
+    firebase_services
+        .register(
+          name: nameController.text.trim(),
+          email: emailController.text.trim(),
+          password: passwordController.text,
+        )
+        .then((user) {
+          Provider.of<UserProvider>(context, listen: false).setCurrentUser(user);
+          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+        })
+        .catchError((error) {
+          String? errorMessage;
+          if (error is FirebaseAuthException) {
+            errorMessage = error.message;
+          }
+          UiUtils.showErrorMessage(errorMessage ?? 'Registration failed');
+        });
   }
-
-  void googlelogin() async {
+  void registerWithGoogle() async {
     try {
-      final user = await firebase_services.loginwithGoogle();
-      if (user == null || !mounted) return;
+      final user = await firebase_services.signupwithGoogle();
+          if (user == null || !mounted) return;
       Provider.of<UserProvider>(context, listen: false).setCurrentUser(user);
       await Provider.of<eventsProvider>(context, listen: false).getEvents();
       if (!mounted) return;
       Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     } catch (error) {
-      if (!mounted) return;
-      final errorMessage = error is FirebaseAuthException
-          ? error.message
-          : error.toString().replaceFirst('Exception: ', '');
+      String? errorMessage;
+      if (error is FirebaseAuthException) {
+        errorMessage = error.message;
+      }
       UiUtils.showErrorMessage(errorMessage ?? 'Google sign-in failed');
-    }
-  }
-}
+    }}}

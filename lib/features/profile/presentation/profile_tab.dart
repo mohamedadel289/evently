@@ -1,8 +1,8 @@
-import 'package:evently/app_theme.dart';
-import 'package:evently/models/Language_model.dart';
-import 'package:evently/provider/user_provider.dart';
-import 'package:evently/screens/login_screen.dart';
-import 'package:evently/widgets/firebase_services.dart';
+import 'package:evently/core/theme/app_theme.dart';
+import 'package:evently/features/settings/models/language_model.dart';
+import 'package:evently/features/auth/providers/user_provider.dart';
+import 'package:evently/features/auth/presentation/login_screen.dart';
+import 'package:evently/core/data/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
