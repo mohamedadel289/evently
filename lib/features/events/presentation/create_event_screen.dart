@@ -1,8 +1,8 @@
-import 'package:evently/app_theme.dart';
-import 'package:evently/models/categories_model.dart';
-import 'package:evently/tabs/home/tab_items.dart';
-import 'package:evently/widgets/defualt_text_form_filed.dart';
-import 'package:evently/widgets/elvated_button.dart';
+import 'package:evently/core/theme/app_theme.dart';
+import 'package:evently/features/events/models/categories_model.dart';
+import 'package:evently/features/events/presentation/tab_items.dart';
+import 'package:evently/core/widgets/default_text_form_field.dart';
+import 'package:evently/core/widgets/elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';

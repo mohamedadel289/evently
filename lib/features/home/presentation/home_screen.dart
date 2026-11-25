@@ -1,9 +1,9 @@
-import 'package:evently/app_theme.dart';
-import 'package:evently/screens/create_event_screen.dart';
-import 'package:evently/tabs/favorite/favorite_tab.dart';
-import 'package:evently/tabs/home/home_tab.dart';
-import 'package:evently/tabs/profile/profile_tab.dart';
-import 'package:evently/widgets/nav_bar_icons.dart';
+import 'package:evently/core/theme/app_theme.dart';
+import 'package:evently/features/events/presentation/create_event_screen.dart';
+import 'package:evently/features/favorites/presentation/favorite_tab.dart';
+import 'package:evently/features/home/presentation/home_tab.dart';
+import 'package:evently/features/profile/presentation/profile_tab.dart';
+import 'package:evently/core/widgets/nav_bar_icons.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
