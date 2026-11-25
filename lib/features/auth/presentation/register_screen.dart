@@ -1,23 +1,23 @@
-import 'package:evently/app_theme.dart';
-import 'package:evently/screens/forget_password.dart';
-import 'package:evently/screens/register_screen.dart';
-import 'package:evently/widgets/defualt_text_form_filed.dart';
-import 'package:evently/widgets/elvated_button.dart';
+import 'package:evently/core/theme/app_theme.dart';
+import 'package:evently/features/auth/presentation/login_screen.dart';
+import 'package:evently/core/widgets/default_text_form_field.dart';
+import 'package:evently/core/widgets/elevated_button.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const String routeName = '/LoginScreen';
+class RegisterScreen extends StatefulWidget {
+  static const String routeName = '/RegisterScreen';
 
-  const LoginScreen({super.key});
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  GlobalKey<FormState> formkey =GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: SingleChildScrollView(
             child: Form(
-              key: formkey,
+              key:formkey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -39,17 +39,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 48),
                   Text(
-                    'Login to your account',
+                    'Create an account',
                     style: theme.textTheme.headlineMedium,
                   ),
                   SizedBox(height: 24),
+                  DefaultTextFormField(
+                    hintText: 'Enter your name',
+                    prefixIcon: 'user',
+                    controller: nameController,
+                    validator:(value){
+                      if(value ==null ||value.length<3){
+                        return 'Invalid name';
+                      }
+                      return null;
+                    }
+                  ),
+                  SizedBox(height: 16),
                   DefaultTextFormField(
                     hintText: 'Enter your email',
                     prefixIcon: 'email',
                     controller: emailController,
                     validator:(value){
-                      if(value==null||value.length<3){
-                        return 'invalid email';
+                      if(value ==null ||!value.contains('@')){
+                        return 'Invalid email';
                       }
                       return null;
                     }
@@ -61,50 +73,50 @@ class _LoginScreenState extends State<LoginScreen> {
                     ispassword: true,
                     controller: passwordController,
                     validator:(value){
-                      if(value==null||value.length<8){
-                        return 'invalid password';
+                      if(value ==null ||value.length<8){
+                        return 'Invalid password';
+                      }
+                      return null;
+                    }
+                  ),
+                  SizedBox(height: 16),
+                  DefaultTextFormField(
+                    hintText: 'Confirm your password',
+                    prefixIcon: 'lock',
+                    ispassword: true,
+                    controller: passwordController,
+                    validator:(value){
+                      if(value != passwordController.text){
+                        return 'Passwords do not match';
                       }
                       return null;
                     }
                   ),
                   SizedBox(height: 8),
-                  TextButton(
-                    style: TextButton.styleFrom(alignment: Alignment.centerRight),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => ForgetPasswordScreen(),
-                      ));
-                    },
-                    child: Text(
-                      'Forgot Password?',
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        color: AppTheme.primaryLight,
-                        fontWeight: FontWeight.w600,
-                        decoration: TextDecoration.underline,
-                        decorationColor: AppTheme.primaryLight,
-                      ),
-                    ),
-                  ),
+              
                   SizedBox(height: 48),
-                  ElvatedButton(text: 'Login', onPressed: () {}),
+                  ElvatedButton(text: 'Register', onPressed: () {}),
                   SizedBox(height: 48),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Don\'t have an account?',
+                        'Already have an account?',
                         style: theme.textTheme.titleSmall,
                       ),
                       TextButton(
-                        style: TextButton.styleFrom(padding: EdgeInsets.zero,minimumSize: Size.zero,), //tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                        child: Text('Register'),
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: Size.zero,
+                        ), //tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+                        child: Text('Login'),
                         onPressed: () {
-                          //Navigator.of(context).push( 
-                            //MaterialPageRoute(
-                              //builder: (context) => RegisterScreen(),
-                            //),
+                          //Navigator.of(context).push(
+                          //MaterialPageRoute(
+                          //builder: (context) => RegisterScreen(),
+                          //),
                           //);
-                          Navigator.of(context).pushReplacementNamed(RegisterScreen.routeName);
+                          Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
                         },
                       ),
                     ],
@@ -121,6 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 24),
                   ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
+                      minimumSize: Size.zero,
                       fixedSize: Size(343, 48),
                       backgroundColor: AppTheme.white,
                       foregroundColor: AppTheme.primaryLight,
@@ -131,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     onPressed: () {},
                     label: Text(
-                      'Login with Google',
+                      'Sign Up with Google',
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: AppTheme.primaryLight,
                       ),
@@ -150,9 +163,9 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-  void login(){
+  void register(){
     if(formkey.currentState!.validate()){
-
-    }
+    // Perform registration logic here
+  }
   }
 }
