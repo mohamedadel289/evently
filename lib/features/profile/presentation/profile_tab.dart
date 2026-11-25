@@ -1,5 +1,5 @@
-import 'package:evently/app_theme.dart';
-import 'package:evently/models/Language_model.dart';
+import 'package:evently/core/theme/app_theme.dart';
+import 'package:evently/features/settings/models/language_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

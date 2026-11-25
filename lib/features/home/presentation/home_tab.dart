@@ -1,5 +1,5 @@
-import 'package:evently/tabs/home/home_header.dart';
-import 'package:evently/widgets/event_item.dart';
+import 'package:evently/features/home/presentation/home_header.dart';
+import 'package:evently/features/events/presentation/event_item.dart';
 import 'package:flutter/material.dart';
 
 class HomeTab extends StatelessWidget {
