@@ -1,7 +1,7 @@
-import 'package:evently/app_theme.dart';
-import 'package:evently/models/Event_Model.dart';
-import 'package:evently/provider/events_provider.dart';
-import 'package:evently/provider/user_provider.dart';
+import 'package:evently/core/theme/app_theme.dart';
+import 'package:evently/features/events/models/event_model.dart';
+import 'package:evently/features/events/providers/events_provider.dart';
+import 'package:evently/features/auth/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

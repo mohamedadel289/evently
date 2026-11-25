@@ -1,4 +1,4 @@
-import 'package:evently/app_theme.dart';
+import 'package:evently/core/theme/app_theme.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class UiUtils {

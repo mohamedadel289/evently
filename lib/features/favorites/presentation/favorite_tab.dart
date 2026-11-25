@@ -1,7 +1,7 @@
-import 'package:evently/provider/events_provider.dart';
-import 'package:evently/provider/user_provider.dart';
-import 'package:evently/widgets/defualt_text_form_filed.dart';
-import 'package:evently/widgets/event_item.dart';
+import 'package:evently/features/events/providers/events_provider.dart';
+import 'package:evently/features/auth/providers/user_provider.dart';
+import 'package:evently/core/widgets/default_text_form_field.dart';
+import 'package:evently/features/events/presentation/event_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

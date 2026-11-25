@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:evently/models/Event_Model.dart';
-import 'package:evently/models/user_model.dart';
+import 'package:evently/features/events/models/event_model.dart';
+import 'package:evently/features/auth/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 

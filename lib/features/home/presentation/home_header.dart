@@ -1,7 +1,7 @@
-import 'package:evently/models/categories_model.dart';
-import 'package:evently/provider/events_provider.dart';
-import 'package:evently/provider/user_provider.dart';
-import 'package:evently/tabs/home/tab_items.dart';
+import 'package:evently/features/events/models/categories_model.dart';
+import 'package:evently/features/events/providers/events_provider.dart';
+import 'package:evently/features/auth/providers/user_provider.dart';
+import 'package:evently/features/events/presentation/tab_items.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
