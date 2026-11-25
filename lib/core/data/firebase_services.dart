@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:evently/models/Event_Model.dart';
+import 'package:evently/features/events/models/event_model.dart';
 
 class firebase_services {
   static CollectionReference<EventModel> getcollection() => FirebaseFirestore

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:evently/models/categories_model.dart';
+import 'package:evently/features/events/models/categories_model.dart';
 
 class EventModel {
    String id;
